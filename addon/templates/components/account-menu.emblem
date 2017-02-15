@@ -1,0 +1,5 @@
+.account-btn-cont
+	=each links as |l|
+		=link-to l.link
+			.account-btn class=l.condition:active:
+				=l.description

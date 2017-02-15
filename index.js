@@ -2,5 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'emberfire-account'
+  name: 'emberfire-account',
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
