@@ -1,12 +1,13 @@
 {{#form-for user submit=(action 'saveForm') class="signup-form" as |f|}}
-	{{#f.text-field "f" label="First Name"}}
-	{{#f.text-field "l" label="Last Name"}}
-	{{#f.text-field "a" label="Address"}}
-	{{#f.text-field "t" label="Town/City"}}
-	{{#f.text-field "z" label="Zipcode"}}
-	{{#f.text-field "s" label="State/Province"}}
-	{{#f.text-field "c" label="Country"}}
-	{{#f.text-field "b" label="Birthdate"}}
-	{{#f.text-field "p" label="Phone"}}
-	{{#f.reset class="common-button" title="Reset Changes"}}
-	{{#f.submit class="common-button" title="Update Info"}}
+	{{f.text-field "f" label="First Name"}}
+	{{f.text-field "l" label="Last Name"}}
+	{{f.text-field "a" label="Address"}}
+	{{f.text-field "t" label="Town/City"}}
+	{{f.text-field "z" label="Zipcode"}}
+	{{f.text-field "s" label="State/Province"}}
+	{{f.text-field "c" label="Country"}}
+	{{f.text-field "b" label="Birthdate"}}
+	{{f.text-field "p" label="Phone"}}
+	{{f.reset "Reset Changes" class="common-button"}}
+	{{f.submit "Update Info" class="common-button"}}
+{{/form-for}}
