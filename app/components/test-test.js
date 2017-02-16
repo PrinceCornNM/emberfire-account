@@ -1,1 +1,0 @@
-export { default } from 'emberfire-account/components/test-test';
