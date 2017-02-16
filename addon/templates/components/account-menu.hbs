@@ -1,0 +1,15 @@
+{{!-- .account-btn-cont
+	=each links as |l|
+		=link-to l.link
+			.account-btn class=l.condition:active:
+				=l.description
+ --}}
+<div class="account-btn-cont">
+	{{#each links as |l|}}
+		{{#link-to l.link}}
+			<div class={{if l.condition "active account-btn" "account-btn"}}>
+				{{l.description}}
+			</div>
+		{{/link-to}}
+	{{/each}}
+</div>

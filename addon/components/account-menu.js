@@ -7,9 +7,9 @@ export default Ember.Component.extend({
   active:    'active account-btn',
   notActive: 'account-btn',
   links: [
-    { description: 'My Information', link: 'account' },
-    { description: 'Alert Settings', link: 'email' },
-    { description: 'Security Settings', link: 'password' }
+    { description: 'Account', link: 'account' },
+    { description: 'Change Email', link: 'email' },
+    { description: 'Change Password', link: 'password' }
   ],
   init() {
     this._super();
