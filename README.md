@@ -1,6 +1,6 @@
-# emberfire-account
+# Ember Fire Account
 
-This README outlines the details of collaborating on this Ember addon.
+This README outlines the details of collaborating on this Ember addon, Ember Fire Account.
 
 ## Installation
 
@@ -11,7 +11,7 @@ This README outlines the details of collaborating on this Ember addon.
 
 ## Running
 
-* `ember serve`
+* `ember serve` (or the shortand, `ember s`)
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ## Running Tests
