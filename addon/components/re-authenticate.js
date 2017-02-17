@@ -15,7 +15,10 @@ const {
 export default Component.extend({
   layout,
   actions: {
-    reauthenticateUser(form) {
+    reauthenticateUser() {
+      set(scope, 'reauthenticate', true);
+    },
+    reauthenticate(form) {
       const scope = this;
       form.validate().then(() => {
         // Credential should work regardless of which account provider they decide to sign in with
@@ -23,7 +26,7 @@ export default Component.extend({
 
         get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
           // reauthenticated the user for the next operation
-          set(scope, 'reauthenticate', true);
+          set(scope, 'reauthenticate', false);
         });
       });
     }
