@@ -9,8 +9,7 @@ import {
 export default {
   email: [
     validatePresence(true),
-    validateFormat({type: 'email'}),
-    validateLength({ min: 8 })
+    validateFormat({type: 'email'})
   ],
   emailConfirmation: validateConfirmation({ on: 'email' })
 };
