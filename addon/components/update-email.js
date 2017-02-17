@@ -16,6 +16,9 @@ export default Ember.Component.extend({
         this.get('firebaseApp').auth().currentUser.updateEmail(form.get('email')).then(() => {
           Ember.Logger.log('successful update');
           scope.get('router').transitionTo('index');
+        }, (error) => {
+          if(error.toString().contains('reauthenticate'))
+            this.sendAction('reauthenticateUser');
         });
       }
     }
