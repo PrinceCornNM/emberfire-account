@@ -1,6 +1,7 @@
 // validations/email.js
 import {
   validatePresence,
+  validateFormat,
   validateLength,
   validateConfirmation,
 } from 'ember-changeset-validations/validators';
@@ -8,7 +9,8 @@ import {
 export default {
   email: [
     validatePresence(true),
-    validateLength({ min: 8 }),
+    validateFormat({type: 'email'}),
+    validateLength({ min: 8 })
   ],
   emailConfirmation: validateConfirmation({ on: 'email' })
 };
