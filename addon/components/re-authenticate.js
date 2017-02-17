@@ -31,7 +31,7 @@ export default Component.extend({
       });
     }
   },
-  reauthenticate: true,
+  reauthenticate: false,
   session: service(),
   firebaseApp: service(),
   init() {
