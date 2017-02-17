@@ -16,6 +16,9 @@ export default Ember.Component.extend({
         this.get('firebaseApp').auth().currentUser.updatePassword(form.get('password')).then(() => {
           Ember.Logger.log('successful update');
           scope.get('router').transitionTo('index');
+        }, (error) => {
+          if(error.toString().contains('reauthenticate'))
+            this.sendAction('reauthenticateUser');
         });
       }
     }
