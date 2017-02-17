@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/update-account';
-import UserValidations from '../validations/user';
+import UserValidations from 'fire/validations/user';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 

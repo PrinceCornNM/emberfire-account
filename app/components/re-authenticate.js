@@ -1,0 +1,1 @@
+export { default } from 'emberfire-account/components/re-authenticate';

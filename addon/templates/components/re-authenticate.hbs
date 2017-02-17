@@ -1,0 +1,5 @@
+{{#if reauthenticated}}
+  {{yield}}
+{{else}}
+  {{#sign-in}}{{/sign-in}}
+{{/if}}
