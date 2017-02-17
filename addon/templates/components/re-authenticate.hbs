@@ -1,7 +1,7 @@
 {{#if reauthenticate}}
-  {{#form-for user submit=(action 'reauthenticateUser') class="reauthenticate-form" as |f|}}
+  {{#form-for creds submit=(action 'reauthenticateUser') class="reauthenticate-form" as |f|}}
     {{f.text-field "email" label="Email"}}
-    {{f.text-field "password" label="Password"}}
+    {{f.password-field "password" label="Password"}}
     {{f.submit "Sign In" class="common-button"}}
   {{/form-for}}
 {{else}}
