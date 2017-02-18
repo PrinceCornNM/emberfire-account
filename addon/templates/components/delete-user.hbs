@@ -1,0 +1,4 @@
+{{#form-for delete_form submit=(action 'deleteUser') class="delete-user-form" as |f|}}
+  {{f.email-field "email" label="Enter Your Email to Confirm" placeholder="Enter Email"}}
+  {{f.submit "Delete Your Account" class="common-button"}}
+{{/form-for}}

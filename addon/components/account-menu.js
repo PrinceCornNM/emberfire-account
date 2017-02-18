@@ -9,7 +9,8 @@ export default Ember.Component.extend({
   links: [
     { description: 'Account', link: 'account' },
     { description: 'Change Email', link: 'email' },
-    { description: 'Change Password', link: 'password' }
+    { description: 'Change Password', link: 'password' },
+    { description: 'Delete Your Account', link: 'delete'}
   ],
   init() {
     this._super();
