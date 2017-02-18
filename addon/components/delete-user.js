@@ -18,8 +18,8 @@ export default Ember.Component.extend({
           if(true){ //if hardDelete
             this.get('store').findRecord("user", userId).then(function(rec){
               // console.log(rec.get('f'));
-              Ember.Logger.log("User data deleted too!");
               rec.remove();
+              Ember.Logger.log("User data deleted too!");
               scope.get('router').transitionTo('index');
             });
           }
@@ -33,13 +33,5 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     this.delete_form = {email: ''};
-    // var user = this.get('firebaseApp').auth().currentUser;
-    // if(user){
-    //   this.get('store').findRecord("user", user.uid).then(function(rec){
-    //     console.log(rec.get('f'));
-    //   });
-    // }else{
-    //   console.log("No user friend");
-    // }
   }
 });

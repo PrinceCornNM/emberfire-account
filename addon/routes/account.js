@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
-const { Route } = Ember;
+const {
+  Route,
+  inject: { service }
+} = Ember;
 
 export default Route.extend({
+  session: service()
 });

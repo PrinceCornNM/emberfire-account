@@ -6,7 +6,7 @@
  --}}
 <div class="account-btn-cont">
 	{{#each links as |l|}}
-		{{#link-to l.link}}
+		{{#link-to (concat 'account.' l.link)}}
 			<div class='account-btn'>
 				{{l.description}}
 			</div>

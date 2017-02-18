@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   active:    'active account-btn',
   notActive: 'account-btn',
   links: [
-    { description: 'Account', link: 'account' },
+    { description: 'Edit User Info', link: 'user' },
     { description: 'Change Email', link: 'email' },
     { description: 'Change Password', link: 'password' },
     { description: 'Delete Your Account', link: 'delete'}
