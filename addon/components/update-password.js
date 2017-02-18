@@ -17,13 +17,13 @@ export default Ember.Component.extend({
           Ember.Logger.log('successful update');
           scope.get('router').transitionTo('index');
         }, (error) => {
-          if(error.toString().contains('reauthenticate'))
+          Ember.Logger.log(error);
+          if(error.code === 'auth/requires-recent-login')
             this.sendAction('reauthenticateUser');
         });
       }
     }
   },
-  PasswordValidations,
   init() {
     this._super(...arguments);
     this.password = new Changeset({password: '', passwordConfirmation: ''}, lookupValidator(PasswordValidations), PasswordValidations);
