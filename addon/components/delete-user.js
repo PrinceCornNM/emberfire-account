@@ -10,15 +10,15 @@ export default Ember.Component.extend({
   actions: {
     deleteUser(form){
       const scope = this;
+      var config = Ember.getOwner(this).resolveRegistration('config:environment');
       var user = this.get('firebaseApp').auth().currentUser;
       if(user && user.email === form.email){
-        if(true){ //if hardDelete
+        if(config.emberfireAccount.hardDelete){
           this.get('store').findRecord("user", user.uid).then(function(rec){
             rec.destroyRecord();
             Ember.Logger.log("User data deleted");
           });
         }
-        // var userId = user.uid;
         user.delete().then(function(){
           Ember.Logger.log('User deleted');
           scope.get('router').transitionTo('index');
