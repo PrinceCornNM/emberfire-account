@@ -12,17 +12,16 @@ export default Ember.Component.extend({
       const scope = this;
       var user = this.get('firebaseApp').auth().currentUser;
       if(user && user.email === form.email){
-        var userId = user.uid;
+        if(true){ //if hardDelete
+          this.get('store').findRecord("user", user.uid).then(function(rec){
+            rec.destroyRecord();
+            Ember.Logger.log("User data deleted");
+          });
+        }
+        // var userId = user.uid;
         user.delete().then(function(){
           Ember.Logger.log('User deleted');
-          if(true){ //if hardDelete
-            this.get('store').findRecord("user", userId).then(function(rec){
-              // console.log(rec.get('f'));
-              rec.remove();
-              Ember.Logger.log("User data deleted too!");
-              scope.get('router').transitionTo('index');
-            });
-          }
+          scope.get('router').transitionTo('index');
         }, (error)=>{
           if(error.code === 'auth/requires-recent-login')
             this.sendAction('reauthenticateUser');
