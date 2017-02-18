@@ -1,5 +1,8 @@
 import Ember from 'ember';
 import layout from '../templates/components/re-authenticate';
+import ReauthenticateValidations from '../validations/reauthenticate';
+import Changeset from 'ember-changeset';
+import lookupValidator from 'ember-changeset-validations';
 
 const {
   Component,
@@ -12,38 +15,27 @@ const {
 export default Component.extend({
   layout,
   actions: {
-    reauthenticateUser(form) {
-      const formObject = form,
-            scope = this;
+    reauthenticateUser() {
+      set(scope, 'reauthenticate', true);
+    },
+    reauthenticate(form) {
+      const scope = this;
+      form.validate().then(() => {
+        // Credential should work regardless of which account provider they decide to sign in with
+        const credential = get(scope, 'firebaseApp').auth().EmailAuthProvider.credential(get(form, 'email'), get('form', 'password'));
 
-      // Credential should work regardless of which account provider they decide to sign in with
-      const credential = get(this, 'firebaseApp').auth().EmailAuthProvider.credential(get(form, 'email'), get('form', 'password'));
-
-      get(this, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
-        // reauthenticated the user for the next operation
-        set(scope, 'reauthenticate', true);
-      }, (error) => {
-        if(error.toString().contains('reauthenticate'))
-          this.sendAction('reauthenticateUser');
+        get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
+          // reauthenticated the user for the next operation
+          set(scope, 'reauthenticate', false);
+        });
       });
     }
   },
   reauthenticate: false,
   session: service(),
-  firebaseApp: service()
+  firebaseApp: service(),
+  init() {
+    this._super(...arguments);
+    this.creds = new Changeset({ email: '', password: '' }, lookupValidator(ReauthenticateValidations), ReauthenticateValidations);
+  }
 });
-
-// ways to get credentials
-/*
-  Google:
-  var credential = firebase.auth.GoogleAuthProvider.credential(
-              googleUser.getAuthResponse().id_token);
-  firebase.auth().signInWithCredential(credential);
-
-  Facebook:
-  var cred = firebase.auth.FacebookAuthProvider.credential(
-      // `event` from the Facebook auth.authResponseChange callback.
-      event.authResponse.accessToken
-  );
-
- */

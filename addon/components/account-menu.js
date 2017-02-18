@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     const scope = this;
     this.get('links').forEach((l) => {
       if (l.link === scope.get('router.currentRouteName')) {
-        l.condition = true;
+        // l.condition = true;
       }
     });
     return this.get('links');
