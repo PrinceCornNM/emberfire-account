@@ -1,4 +1,11 @@
-{{#form-for delete_form submit=(action 'deleteUser') class="delete-user-form" as |f|}}
-  {{f.email-field "email" label="Enter Your Email to Confirm" placeholder="Enter Email"}}
-  {{f.submit "Delete Your Account" class="common-button"}}
-{{/form-for}}
+<div class="ef-account">
+	<div class="ef-account-form">
+		<h1 class="ef-account-form-title">Delete Your Account</h1>
+		{{#form-for delete_form submit=(action 'deleteUser') as |f|}}
+			<div class="ef-account-form-input">
+				{{f.email-field "email" label="Email" }}
+			</div>
+			{{f.submit "Delete Your Account" class="common-button"}}
+		{{/form-for}}
+	</div>
+</div>

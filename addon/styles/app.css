@@ -1,0 +1,32 @@
+.ef-account .ef-account-sidebar {
+	float: left;
+	width: 20%;
+	margin-right: 0%;
+}
+.ef-account .ef-account-form {
+  float: right;
+  display: inline-block;
+  padding: 3% 0%;
+  background-color: #292929;
+  margin: auto;
+  text-align: center;
+  width: 80%;
+}
+.ef-account .ef-account-form .ef-account-form-title {
+  margin-top: -1%;
+  margin-bottom: 2%;
+}
+.ef-account .ef-account-form .common-button {
+  margin-top: 3%;
+  margin-bottom: 0%;
+}
+.ef-account-form-input {
+	width: 75%;
+	text-align: left;
+	margin-left: 16%;
+}
+.ef-account-form-input input:not([type]), input[type="text"], input[type="password"], input[type="email"]  {
+  float: right;
+  width: 50%;
+  margin-right: 10%;
+}

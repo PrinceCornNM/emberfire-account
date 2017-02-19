@@ -1,15 +1,28 @@
-{{#re-authenticate}}
-  {{#form-for user submit=(action 'saveForm') class="signup-form" as |f|}}
-    {{f.text-field "f" label="First Name"}}
-    {{f.text-field "l" label="Last Name"}}
-    {{f.text-field "a" label="Address"}}
-    {{f.text-field "t" label="Town/City"}}
-    {{f.text-field "z" label="Zipcode"}}
-    {{f.text-field "s" label="State/Province"}}
-    {{f.text-field "c" label="Country"}}
-    {{f.text-field "b" label="Birthdate"}}
-    {{f.text-field "p" label="Phone"}}
-    {{f.reset "Reset Changes" class="common-button"}}
-    {{f.submit "Update Info" class="common-button"}}
-  {{/form-for}}
-{{/re-authenticate}}
+<div class="ef-account">
+    <div class="ef-account-form">
+        <h1 class="ef-account-form-title">Update Account Info</h1>
+        {{#form-for user submit=(action 'saveForm') as |f|}}
+            <div class="ef-account-form-input">
+                {{f.text-field "f" label="First Name"}}
+                <br>
+                {{f.text-field "l" label="Last Name"}}
+                <br>
+                {{f.text-field "a" label="Address"}}
+                <br>
+                {{f.text-field "t" label="Town/City"}}
+                <br>
+                {{f.text-field "z" label="Zipcode"}}
+                <br>
+                {{f.text-field "s" label="State/Province"}}
+                <br>
+                {{f.text-field "c" label="Country"}}
+                <br>
+                {{f.text-field "b" label="Birthdate"}}
+                <br>
+                {{f.text-field "p" label="Phone"}}
+            </div>
+            {{f.reset "Reset Changes" class="common-button"}}
+            {{f.submit "Update Info" class="common-button"}}
+        {{/form-for}}
+    </div>
+</div>
