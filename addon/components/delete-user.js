@@ -11,35 +11,34 @@ export default Ember.Component.extend({
   hasError: false,
   actions: {
     deleteUser(form){
-      console.log("Deleting user")
       const scope = this;
       var config = Ember.getOwner(this).resolveRegistration('config:environment');
       var user = this.get('firebaseApp').auth().currentUser;
-      if(user && user.email === form.email){
-        if(config.emberfireAccount.hardDelete){
-          this.get('store').findRecord("user", user.uid).then(function(rec){
-            rec.destroyRecord();
-            Ember.Logger.log("User data deleted");
+      return new Ember.RSVP.Promise(function(resolve, reject){
+        if(user && user.email === form.email){
+          if(config.emberfireAccount.hardDelete){
+            scope.get('store').findRecord("user", user.uid).then(function(rec){
+              rec.destroyRecord();
+              Ember.Logger.log("User data deleted");
+            });
+          }
+          user.delete().then(function(){
+            Ember.Logger.log('User deleted');
+            scope.get('router').transitionTo('index');
+            resolve();
+          }, (error)=>{
+            if(error.code === 'auth/requires-recent-login')
+              scope.get('reauthenticate').set('shouldReauthenticate', true);
+            reject();
           });
-        }
-        user.delete().then(function(){
-          Ember.Logger.log('User deleted');
-          scope.get('router').transitionTo('index');
-        }, (error)=>{
-          if(error.code === 'auth/requires-recent-login')
-            scope.get('reauthenticate').set('shouldReauthenticate', true);
-        });
-      }else{
-        if(!this.get("hasError")){
-          Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
-          this.set("hasError", true);
-        }
-
-        var promise = new Ember.RSVP.Promise(function(resolve, reject){
+        }else{
+          if(!scope.get("hasError")){
+            Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
+            scope.set("hasError", true);
+          }
           reject();
-        });
-        return promise;
-      }
+        }
+      });
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
