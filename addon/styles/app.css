@@ -25,7 +25,7 @@
 	text-align: left;
 	margin-left: 16%;
 }
-.ef-account-form-input input:not([type]), input[type="text"], input[type="password"], input[type="email"]  {
+.ef-account-form-input input:not([type]), .ef-account-form-input input[type="text"], .ef-account-form-input input[type="password"], .ef-account-form-input input[type="email"]  {
   float: right;
   width: 50%;
   margin-right: 10%;
