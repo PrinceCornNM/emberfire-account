@@ -8,7 +8,6 @@ export default Ember.Component.extend({
   notActive: 'account-btn',
   'account-config': Ember.inject.service(),
   links: Ember.computed('account-config.links', function() {
-    console.log(this.get('account-config.links'));
     return this.get('account-config.links');
   }),
   init() {

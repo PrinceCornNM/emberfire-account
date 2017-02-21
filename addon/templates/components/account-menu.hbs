@@ -1,8 +1,8 @@
 <div class="account-btn-cont">
-	{{#each-in links as |l|}}
+	{{#each-in links as |l title|}}
 		{{#link-to l}}
 			<div class='account-btn'>
-				{{get links l}}
+				{{title}}
 			</div>
 		{{/link-to}}
 	{{/each-in}}
