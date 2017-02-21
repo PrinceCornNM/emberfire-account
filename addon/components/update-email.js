@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   classNames: ['update-email-component'],
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
+  reauthenticate: Ember.inject.service(),
   actions: {
     updateEmail(form) {
       const scope = this;
@@ -19,11 +20,15 @@ export default Ember.Component.extend({
         }, (error) => {
           Ember.Logger.log(error);
           if(error.code === 'auth/requires-recent-login')
-            this.sendAction('reauthenticateUser');
+            scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
       }
     }
   },
+  shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
+    Ember.Logger.log(this.get('reauthenticate.shouldReauthenticate'));
+    return this.get('reauthenticate.shouldReauthenticate');
+  }),
   EmailValidations,
   init() {
     this._super(...arguments);

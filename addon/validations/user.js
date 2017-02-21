@@ -45,7 +45,10 @@ export default {
       type: 'phone',
       allowBlank: true
     }),
-    validateLength({ min: 7 })
+    validateLength({
+      min: 7,
+      allowBlank: true
+    })
   ],
   password: validatePresence(true),
   passwordConfirmation: [

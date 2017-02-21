@@ -1,4 +1,8 @@
-<div class="ef-account">
-	{{#account-menu}}{{/account-menu}}
-	{{outlet}}
-</div>
+{{#if session.isAuthenticated}}
+  <div class="ef-account">
+    {{#account-menu}}{{/account-menu}}
+    {{outlet}}
+  </div>
+{{else}}
+  You need to be signed in to  view your account info.
+{{/if}}

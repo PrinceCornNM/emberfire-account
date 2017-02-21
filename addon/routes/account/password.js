@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
-const { Route } = Ember;
+const {
+  inject: { service },
+  Route
+} = Ember;
 
 export default Route.extend({
+  reauthenticate: service()
 });

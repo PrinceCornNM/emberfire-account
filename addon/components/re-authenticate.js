@@ -15,9 +15,6 @@ const {
 export default Component.extend({
   layout,
   actions: {
-    reauthenticateUser() {
-      set(scope, 'reauthenticate', true);
-    },
     reauthenticate(form) {
       const scope = this;
       form.validate().then(() => {
@@ -26,14 +23,14 @@ export default Component.extend({
 
         get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
           // reauthenticated the user for the next operation
-          set(scope, 'reauthenticate', false);
+          get(scope, 'reauthenticate').send('reauthenticateUser', false);
         });
       });
     }
   },
-  reauthenticate: false,
   session: service(),
   firebaseApp: service(),
+  reauthenticate: service(),
   init() {
     this._super(...arguments);
     this.creds = new Changeset({ email: '', password: '' }, lookupValidator(ReauthenticateValidations), ReauthenticateValidations);

@@ -1,5 +1,9 @@
-{{#form-for email submit=(action 'updateEmail') class="email-update-form" as |f|}}
-  {{f.email-field "email" label="Email" placeholder="Enter Email"}}
-  {{f.email-field "emailConfirmation" label="Email Confirmation" placeholder="Enter Email Confirmation"}}
-  {{f.submit "Update Info" class="common-button"}}
-{{/form-for}}
+{{#if shouldReauthenticate}}
+  {{#re-authenticate}}{{/re-authenticate}}
+{{else}}
+  {{#form-for email submit=(action 'updateEmail') class="email-update-form" as |f|}}
+    {{f.email-field "email" label="Email" placeholder="Enter Email"}}
+    {{f.email-field "emailConfirmation" label="Email Confirmation" placeholder="Enter Email Confirmation"}}
+    {{f.submit "Update Info" class="common-button"}}
+  {{/form-for}}
+{{/if}}

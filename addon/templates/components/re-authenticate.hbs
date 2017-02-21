@@ -1,4 +1,6 @@
-{{#if reauthenticate}}
+{{#if reauthenticate.shouldReauthenticate}}
+  <h2>Reauthentication</h2>
+  <p>It's been a long time since you last logged in so for security please re-enter your credentials.</p>
   {{#form-for creds submit=(action 'reauthenticate') class="reauthenticate-form" as |f|}}
     {{f.text-field "email" label="Email"}}
     {{f.password-field "password" label="Password"}}

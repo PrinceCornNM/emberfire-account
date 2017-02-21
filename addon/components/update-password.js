@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   classNames: ['update-password-component'],
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
+  reauthenticate: Ember.inject.service(),
   actions: {
     updatePassword(form) {
       const scope = this;
@@ -17,15 +18,18 @@ export default Ember.Component.extend({
           Ember.Logger.log('successful update');
           scope.get('router').transitionTo('index');
         }, (error) => {
-          Ember.Logger.log(error);
           if(error.code === 'auth/requires-recent-login')
-            this.sendAction('reauthenticateUser');
+            scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
       }
     }
   },
+  shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
+    Ember.Logger.log(this.get('reauthenticate.shouldReauthenticate'));
+    return this.get('reauthenticate.shouldReauthenticate');
+  }),
   init() {
-    this._super(...arguments);
+    this._super();
     this.password = new Changeset({password: '', passwordConfirmation: ''}, lookupValidator(PasswordValidations), PasswordValidations);
   }
 });
