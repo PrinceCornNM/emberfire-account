@@ -1,0 +1,31 @@
+.update-form {
+  padding: 20px 0px;
+  margin: auto;
+  text-align: center;
+}
+.password-update-form .form-title {
+  margin-top: -10px;
+}
+.password-update-form .fields {
+  text-align: left;
+  width: 340px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.password-update-form .fields label {
+  width: 140px;
+  float: left;
+}
+.password-update-form .fields input {
+  width: 200px;
+  margin-bottom: 15px;
+  border: 1px;
+  padding: 2px 5px;
+}
+.password-update-form .label-input {
+  float: left;
+}
+.password-update-form .common-button {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}

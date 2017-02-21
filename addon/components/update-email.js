@@ -26,7 +26,6 @@ export default Ember.Component.extend({
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
-    Ember.Logger.log(this.get('reauthenticate.shouldReauthenticate'));
     return this.get('reauthenticate.shouldReauthenticate');
   }),
   EmailValidations,

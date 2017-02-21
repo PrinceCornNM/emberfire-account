@@ -4,7 +4,10 @@
 module.exports = function(environment) {
   const ENV = {
     modulePrefix: 'emberfire-account',
-    environment: environment
+    environment: environment,
+    emberfireAccount: {
+      hardDelete: false
+    }
   }
 
   return ENV;

@@ -23,7 +23,7 @@ export default Component.extend({
 
         get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
           // reauthenticated the user for the next operation
-          get(scope, 'reauthenticate').send('reauthenticateUser', false);
+          set(get(scope, 'reauthenticate'), 'shouldReauthenticate', false);
         });
       });
     }
