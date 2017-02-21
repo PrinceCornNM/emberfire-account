@@ -27,6 +27,8 @@ export default Ember.Component.extend({
           if(error.code === 'auth/requires-recent-login')
             scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
+      }else{
+        Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
       }
     }
   },
