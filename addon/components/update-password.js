@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   classNames: ['update-password-component'],
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
+  notify: Ember.inject.service('notify'),
+  'account-config': Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
   actions: {
     updatePassword(form) {

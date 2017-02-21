@@ -7,6 +7,8 @@ export default Ember.Component.extend({
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
   store: Ember.inject.service(),
+  notify: Ember.inject.service('notify'),
+  'account-config': Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
   hasError: false,
   actions: {

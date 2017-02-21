@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   classNames: ['update-email-component'],
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
+  notify: Ember.inject.service('notify'),
+  'account-config': Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
   actions: {
     updateEmail(form) {
@@ -16,10 +18,12 @@ export default Ember.Component.extend({
       if (this.get('session.isAuthenticated') && this.get('email').get('isValid')) {
         this.get('firebaseApp').auth().currentUser.updateEmail(form.get('email')).then(() => {
           Ember.Logger.log('successful update');
+          this.get('account-config'.messages)['successfulUpdateEmail'];
           scope.get('router').transitionTo('index');
         }, (error) => {
           Ember.Logger.log(error);
           if(error.code === 'auth/requires-recent-login')
+            this.get('account-config'.messages)['unsuccessfulUpdateEmail'];
             scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
       }

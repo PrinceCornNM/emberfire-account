@@ -6,6 +6,8 @@ import lookupValidator from 'ember-changeset-validations';
 
 export default Ember.Component.extend({
   layout,
+  notify: Ember.inject.service('notify'),
+  'account-config': Ember.inject.service(),
   actions: {
     saveForm(form) {
       form.validate().then(() => {
