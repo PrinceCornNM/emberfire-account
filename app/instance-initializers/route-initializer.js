@@ -34,7 +34,7 @@ export function initialize( appInstance ) {
   let efConfig = {};
 
   Object.keys(DEFAULT_CONFIG).forEach((key) => {
-      efConfig = merge(config[DEFAULT_CONFIG, 'emberfire-account']);
+      efConfig = merge(DEFAULT_CONFIG, config['emberfire-account']);
   });
 
 
