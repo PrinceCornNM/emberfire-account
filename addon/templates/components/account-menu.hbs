@@ -1,9 +1,9 @@
 <div class="account-btn-cont">
-	{{#each links as |l|}}
-		{{#link-to (concat 'account.' l.link)}}
+	{{#each-in links as |l|}}
+		{{#link-to l}}
 			<div class='account-btn'>
-				{{l.description}}
+				{{get links l}}
 			</div>
 		{{/link-to}}
-	{{/each}}
+	{{/each-in}}
 </div>

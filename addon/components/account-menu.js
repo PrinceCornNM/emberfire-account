@@ -6,20 +6,19 @@ export default Ember.Component.extend({
   classNames: ['menu-section'],
   active:    'active account-btn',
   notActive: 'account-btn',
-  links: [
-    { description: 'Edit User Info', link: 'user' },
-    { description: 'Change Email', link: 'email' },
-    { description: 'Change Password', link: 'password' },
-    { description: 'Delete Your Account', link: 'delete'}
-  ],
+  'account-config': Ember.inject.service(),
+  links: Ember.computed('account-config.links', function() {
+    console.log(this.get('account-config.links'));
+    return this.get('account-config.links');
+  }),
   init() {
     this._super();
     const scope = this;
-    this.get('links').forEach((l) => {
-      if (l.link === scope.get('router.currentRouteName')) {
+    // window.service = this.get('accountConfig');
+    Object.keys( this.get('links')).forEach((l) => {
+      if (l === scope.get('router.currentRouteName')) {
         // l.condition = true;
       }
     });
-    return this.get('links');
   }
 });
