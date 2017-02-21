@@ -3,6 +3,7 @@ import layout from '../templates/components/re-authenticate';
 import ReauthenticateValidations from '../validations/reauthenticate';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
+import firebase from 'firebase';
 
 const {
   Component,
@@ -19,11 +20,13 @@ export default Component.extend({
       const scope = this;
       form.validate().then(() => {
         // Credential should work regardless of which account provider they decide to sign in with
-        const credential = get(scope, 'firebaseApp').auth().EmailAuthProvider.credential(get(form, 'email'), get('form', 'password'));
+        const credential = firebase.auth.EmailAuthProvider.credential(get(form, 'email'), get(form, 'password'));
 
         get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
           // reauthenticated the user for the next operation
           set(get(scope, 'reauthenticate'), 'shouldReauthenticate', false);
+        }, (error) => {
+          console.log(error);
         });
       });
     }
