@@ -8,8 +8,10 @@ export default Ember.Component.extend({
   session: Ember.inject.service(),
   store: Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
+  hasError: false,
   actions: {
     deleteUser(form){
+      console.log("Deleting user")
       const scope = this;
       var config = Ember.getOwner(this).resolveRegistration('config:environment');
       var user = this.get('firebaseApp').auth().currentUser;
@@ -28,7 +30,15 @@ export default Ember.Component.extend({
             scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
       }else{
-        Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
+        if(!this.get("hasError")){
+          Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
+          this.set("hasError", true);
+        }
+
+        var promise = new Ember.RSVP.Promise(function(resolve, reject){
+          reject();
+        });
+        return promise;
       }
     }
   },
