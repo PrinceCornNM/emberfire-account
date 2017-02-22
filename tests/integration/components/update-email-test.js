@@ -7,6 +7,5 @@ moduleForComponent('update-email', 'Integration | Component | update email', {
 
 test('it renders', function(assert) {
   this.render(hbs`{{#update-email}}{{/update-email}}`);
-  assert.ok(this.$().text().include("Email"));
-  assert.ok(this.$().text().include("Email Confirmation"));
+  assert.ok(this.$().text().trim().substring(0, 12), "Update Email");
 });
