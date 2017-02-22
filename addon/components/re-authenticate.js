@@ -18,17 +18,23 @@ export default Component.extend({
   actions: {
     reauthenticate(form) {
       const scope = this;
-      form.validate().then(() => {
-        // Credential should work regardless of which account provider they decide to sign in with
-        const credential = firebase.auth.EmailAuthProvider.credential(get(form, 'email'), get(form, 'password'));
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        form.validate().then(() => {
+          // Credential should work regardless of which account provider they decide to sign in with
+          const credential = firebase.auth.EmailAuthProvider.credential(get(form, 'email'), get(form, 'password'));
 
-        get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
-          // reauthenticated the user for the next operation
-          set(get(scope, 'reauthenticate'), 'shouldReauthenticate', false);
-        }, (error) => {
-          console.log(error);
+          get(scope, 'firebaseApp').auth().currentUser.reauthenticate(credential).then(() => {
+            // reauthenticated the user for the next operation
+            set(get(scope, 'reauthenticate'), 'shouldReauthenticate', false);
+            resolve();
+          }, (error) => {
+            console.log(error);
+            reject();
+          });
+        }, () => {
+          reject();
         });
-      });
+      }
     }
   },
   session: service(),

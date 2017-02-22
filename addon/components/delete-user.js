@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       const scope = this;
       var config = Ember.getOwner(this).resolveRegistration('config:environment');
       var user = this.get('firebaseApp').auth().currentUser;
-      return new Ember.RSVP.Promise(function(resolve, reject){
+      return new Ember.RSVP.Promise(function(resolve, reject) {
         if(user && user.email === form.email){
           if(config.emberfireAccount.hardDelete){
             scope.get('store').findRecord("user", user.uid).then(function(rec){
