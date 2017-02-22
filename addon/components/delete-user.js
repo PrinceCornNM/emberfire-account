@@ -32,6 +32,7 @@ export default Ember.Component.extend({
               scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulDeleteAccount']);
               scope.get('reauthenticate').set('shouldReauthenticate', true);
             }
+            reject();
           });
         }else{
           if(!scope.get("hasError")){
@@ -39,6 +40,7 @@ export default Ember.Component.extend({
             Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
             scope.set("hasError", true);
           }
+          reject();
         }
       });
     }
