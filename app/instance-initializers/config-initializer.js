@@ -5,9 +5,9 @@ import config from '../config/environment';
 const DEFAULT_CONFIG = {
     hardDelete: false,
     links: {
-      'account.email': 'Email',
-      'account.password': 'Password',
-      'account.delete': 'Delete'
+      'account.email': 'Update Email',
+      'account.password': 'Change Password',
+      'account.delete': 'Delete Account'
     },
     messages: {
       successfulLogin: 'You have logged in successfully!',
