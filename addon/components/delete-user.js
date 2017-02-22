@@ -21,24 +21,23 @@ export default Ember.Component.extend({
           if(config.emberfireAccount.hardDelete){
             scope.get('store').findRecord("user", user.uid).then(function(rec){
               rec.destroyRecord();
-              Ember.Logger.log("User data deleted");
+              scope.get('notify').success(scope.get('account-config').messages['successfulDeleteAccount']);
             });
           }
           user.delete().then(function(){
-            Ember.Logger.log('User deleted');
             scope.get('router').transitionTo('index');
             resolve();
           }, (error)=>{
             if(error.code === 'auth/requires-recent-login')
+              scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulDeleteAccount']);
               scope.get('reauthenticate').set('shouldReauthenticate', true);
-            reject();
           });
         }else{
           if(!scope.get("hasError")){
+            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulDeleteAccount']);
             Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect password. Please re-enter your e-mail.</div>');
             scope.set("hasError", true);
           }
-          reject();
         }
       });
     }

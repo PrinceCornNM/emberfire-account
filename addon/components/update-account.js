@@ -10,7 +10,9 @@ export default Ember.Component.extend({
   'account-config': Ember.inject.service(),
   actions: {
     saveForm(form) {
+      const scope = this;
       form.validate().then(() => {
+        scope.get('notify').success(scope.get('account-config').messages['successfulUpdateAccount']);
         form.save();
       });
     }

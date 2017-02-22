@@ -17,15 +17,19 @@ export default Ember.Component.extend({
       const scope = this;
       if (this.get('session.isAuthenticated') && this.get('email').get('isValid')) {
         this.get('firebaseApp').auth().currentUser.updateEmail(form.get('email')).then(() => {
-          Ember.Logger.log('successful update');
-          this.get('account-config'.messages)['successfulUpdateEmail'];
-          scope.get('router').transitionTo('index');
+          scope.get('notify').success(scope.get('account-config').messages['successfulUpdateEmail']);
         }, (error) => {
           Ember.Logger.log(error);
           if(error.code === 'auth/requires-recent-login')
-            this.get('account-config'.messages)['unsuccessfulUpdateEmail'];
+            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
             scope.get('reauthenticate').set('shouldReauthenticate', true);
         });
+      }
+      else {
+          if(!scope.get("hasError")){
+            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
+            scope.set("hasError", true);
+          }
       }
     }
   },

@@ -18,11 +18,13 @@ const DEFAULT_CONFIG = {
       successfulUpdateEmail: 'You have successfully updated your email!',
       unsuccessfulUpdateEmail: 'We were unable to update your email.',
       successfulUpdatePassword: 'You have successfully updated your password!',
-      usuccessfulUpdatePassword: 'We were unable to update your password.',
+      unsuccessfulUpdatePassword: 'We were unable to update your password.',
       successfulDeleteAccount: 'You have successfully deleted your account!',
       unsuccessfulDeleteAccount: 'We were unable to delete your account.',
       successfulLogout: 'You are now logged out!',
-      unsuccessfulLogout: 'We were unable to log out of your account.'
+      unsuccessfulLogout: 'We were unable to log out of your account.',
+      successfulCreateAccount: 'You have created an account successfully!',
+      unsuccessfulCreateAccount: 'We were unable to create your account.'
     }
 };
 
