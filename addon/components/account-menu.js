@@ -14,10 +14,12 @@ export default Ember.Component.extend({
     this._super();
     const scope = this;
     // window.service = this.get('accountConfig');
-    Object.keys( this.get('links')).forEach((l) => {
-      if (l === scope.get('router.currentRouteName')) {
-        // l.condition = true;
-      }
-    });
+    if(this.get('links')){
+      Object.keys( this.get('links')).forEach((l) => {
+        if (l === scope.get('router.currentRouteName')) {
+          // l.condition = true;
+        }
+      });
+    }
   }
 });
