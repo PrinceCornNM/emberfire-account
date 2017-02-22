@@ -10,7 +10,7 @@ export default Route.extend({
   session: service(),
   'account-config': Ember.inject.service(),
   beforeModel() {
-    if (this.get('account-config').signInLink && !this.get('session.isAuthenticated'))
-      this.get('router').transitionTo(Object.keys(this.get('account-config').signInLink)[0]);
+    if (this.get('account-config').portalLink)
+      this.get('router').transitionTo(Object.keys(this.get('account-config').portalLink)[0]);
   }
 });
