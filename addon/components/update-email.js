@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   classNames: ['update-email-component'],
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
-  notify: Ember.inject.service('notify'),
+  notify: Ember.inject.service(),
   'account-config': Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
   actions: {
