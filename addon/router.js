@@ -3,5 +3,6 @@ export default function(router) {
     this.route('email');
     this.route('password');
     this.route('delete');
+    this.route('portal', {path: '/'});
   });
 }
