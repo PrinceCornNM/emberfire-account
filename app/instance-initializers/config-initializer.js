@@ -5,9 +5,10 @@ import config from '../config/environment';
 const DEFAULT_CONFIG = {
     hardDelete: false,
     links: {
+      'account.delete': 'Delete Account',
       'account.email': 'Update Email',
       'account.password': 'Change Password',
-      'account.delete': 'Delete Account'
+      'account.verify-email': 'Send Email Verification'
     },
     messages: {
       successfulLogin: 'You have logged in successfully!',
@@ -30,19 +31,16 @@ const DEFAULT_CONFIG = {
 const { merge, set } = Ember;
 
 export function initialize( appInstance ) {
-  let configService = appInstance.lookup('service:account-config');
-
-  let efConfig = {};
+  let configService = appInstance.lookup('service:account-config'),
+      efConfig = {};
 
   Object.keys(DEFAULT_CONFIG).forEach((key) => {
       efConfig = merge(DEFAULT_CONFIG, config['emberfire-account']);
   });
 
-
   Object.keys(efConfig).forEach((key) => {
     set(configService, key, efConfig[key]);
   });
-  window.service = configService;
 }
 
 export default {

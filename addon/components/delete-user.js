@@ -7,15 +7,15 @@ export default Ember.Component.extend({
   firebaseApp: Ember.inject.service(),
   session: Ember.inject.service(),
   store: Ember.inject.service(),
-  notify: Ember.inject.service('notify'),
+  notify: Ember.inject.service(),
   'account-config': Ember.inject.service(),
   reauthenticate: Ember.inject.service(),
   hasError: false,
   actions: {
     deleteUser(form){
-      const scope = this;
-      var config = Ember.getOwner(this).resolveRegistration('config:environment');
-      var user = this.get('firebaseApp').auth().currentUser;
+      const scope = this,
+            config = Ember.getOwner(this).resolveRegistration('config:environment'),
+            user = this.get('firebaseApp').auth().currentUser;
       return new Ember.RSVP.Promise(function(resolve, reject) {
         if(user && user.email === form.email){
           if(config.emberfireAccount.hardDelete){
