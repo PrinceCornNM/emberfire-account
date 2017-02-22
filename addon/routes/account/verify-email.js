@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 
 const {
-  computed,
+  // computed,
   inject: { service },
   Route
 } = Ember;
