@@ -6,20 +6,9 @@ moduleForComponent('update-password', 'Integration | Component | update password
 });
 
 test('it renders', function(assert) {
+  this.render(hbs`{{#update-password}}{{/update-password}}`);
+  // console.log(this.$().text().trim(), );
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{update-password}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#update-password}}
-      template block text
-    {{/update-password}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // assert.ok(find('.ef-account-form-title').text(), 'Password');
+  assert.ok(this.$().text().substring(0, 15), "Change Password");
 });

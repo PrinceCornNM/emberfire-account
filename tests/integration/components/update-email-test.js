@@ -6,9 +6,7 @@ moduleForComponent('update-email', 'Integration | Component | update email', {
 });
 
 test('it renders', function(assert) {
-  // Template block usage:
   this.render(hbs`{{#update-email}}{{/update-email}}`);
-
   assert.ok(this.$().text().include("Email"));
   assert.ok(this.$().text().include("Email Confirmation"));
 });
