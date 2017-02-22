@@ -26,7 +26,7 @@ export default Ember.Component.extend({
           });
         }
         reject();
-      }
+      });
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {

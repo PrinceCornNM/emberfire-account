@@ -34,7 +34,7 @@ export default Component.extend({
         }, () => {
           reject();
         });
-      }
+      });
     }
   },
   session: service(),

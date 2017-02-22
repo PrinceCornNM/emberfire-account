@@ -21,13 +21,14 @@ export default Ember.Component.extend({
             resolve();
           }, (error) => {
             Ember.Logger.log(error);
-            if(error.code === 'auth/requires-recent-login')
+            if(error.code === 'auth/requires-recent-login') {
               scope.get('reauthenticate').set('shouldReauthenticate', true);
+            }
             reject();
           });
         }
         reject();
-      }
+      });
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
