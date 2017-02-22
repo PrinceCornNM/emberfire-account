@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       const scope = this;
       var config = Ember.getOwner(this).resolveRegistration('config:environment');
       var user = this.get('firebaseApp').auth().currentUser;
-      return new Ember.RSVP.Promise(function(resolve, reject){
+      return new Ember.RSVP.Promise(function(resolve, reject) {
         if(user && user.email === form.email){
           if(config.emberfireAccount.hardDelete){
             scope.get('store').findRecord("user", user.uid).then(function(rec){
@@ -28,9 +28,10 @@ export default Ember.Component.extend({
             scope.get('router').transitionTo('index');
             resolve();
           }, (error)=>{
-            if(error.code === 'auth/requires-recent-login')
+            if(error.code === 'auth/requires-recent-login') {
               scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulDeleteAccount']);
               scope.get('reauthenticate').set('shouldReauthenticate', true);
+            }
           });
         }else{
           if(!scope.get("hasError")){

@@ -15,22 +15,22 @@ export default Ember.Component.extend({
   actions: {
     updateEmail(form) {
       const scope = this;
-      if (this.get('session.isAuthenticated') && this.get('email').get('isValid')) {
-        this.get('firebaseApp').auth().currentUser.updateEmail(form.get('email')).then(() => {
-          scope.get('notify').success(scope.get('account-config').messages['successfulUpdateEmail']);
-        }, (error) => {
-          Ember.Logger.log(error);
-          if(error.code === 'auth/requires-recent-login')
-            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
-            scope.get('reauthenticate').set('shouldReauthenticate', true);
-        });
-      }
-      else {
-          if(!scope.get("hasError")){
-            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
-            scope.set("hasError", true);
-          }
-      }
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        if (scope.get('session.isAuthenticated') && scope.get('email').get('isValid')) {
+          scope.get('firebaseApp').auth().currentUser.updateEmail(form.get('email')).then(() => {
+            scope.get('notify').success(scope.get('account-config').messages['successfulUpdateEmail']);
+            resolve();
+          }, (error) => {
+            Ember.Logger.log(error);
+            if(error.code === 'auth/requires-recent-login') {
+              scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
+              scope.get('reauthenticate').set('shouldReauthenticate', true);
+            }
+            reject();
+          });
+        }
+        reject();
+      });
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {

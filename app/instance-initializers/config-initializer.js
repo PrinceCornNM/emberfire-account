@@ -5,7 +5,6 @@ import config from '../config/environment';
 const DEFAULT_CONFIG = {
     hardDelete: false,
     links: {
-      'account.user': 'User',
       'account.email': 'Email',
       'account.password': 'Password',
       'account.delete': 'Delete'
@@ -50,4 +49,3 @@ export default {
   name: 'route-initializer',
   initialize
 };
-

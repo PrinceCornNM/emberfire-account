@@ -15,21 +15,21 @@ export default Ember.Component.extend({
   actions: {
     updatePassword(form) {
       const scope = this;
-      if (this.get('session.isAuthenticated') && this.get('password').get('isValid')) {
-        this.get('firebaseApp').auth().currentUser.updatePassword(form.get('password')).then(() => {
-          scope.get('notify').success(scope.get('account-config').messages['successfulUpdatePassword']);
-        }, (error) => {
-          if(error.code === 'auth/requires-recent-login')
-            scope.get('notify').success(scope.get('account-config').messages['unsuccessfulUpdatePassword']);
-            scope.get('reauthenticate').set('shouldReauthenticate', true);
-        });
-      }
-      else {
-          if(!scope.get("hasError")){
-            scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdatePassword']);
-            scope.set("hasError", true);
-          }
-      }
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        if (scope.get('session.isAuthenticated') && scope.get('password').get('isValid')) {
+          scope.get('firebaseApp').auth().currentUser.updatePassword(form.get('password')).then(() => {
+            scope.get('notify').success(scope.get('account-config').messages['successfulUpdatePassword']);
+            resolve();
+          }, (error) => {
+            if(error.code === 'auth/requires-recent-login') {
+              scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdatePassword']);
+              scope.get('reauthenticate').set('shouldReauthenticate', true);
+            }
+            reject();
+          });
+        }
+        reject();
+      });
     }
   },
   shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
