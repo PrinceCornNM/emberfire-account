@@ -7,7 +7,7 @@ import firebase from 'firebase';
 
 const {
   Component,
-  computed,
+  // computed,
   get,
   set,
   inject: { service }

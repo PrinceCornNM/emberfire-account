@@ -6,20 +6,6 @@ moduleForComponent('update-email', 'Integration | Component | update email', {
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{update-email}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#update-email}}
-      template block text
-    {{/update-email}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.render(hbs`{{#update-email}}{{/update-email}}`);
+  assert.ok(this.$().text().trim().substring(0, 12), "Update Email");
 });
