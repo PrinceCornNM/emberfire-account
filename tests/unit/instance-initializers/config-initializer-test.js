@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { initialize } from 'dummy/instance-initializers/config-initializer';
+// import { initialize } from 'dummy/instance-initializers/config-initializer';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 
@@ -18,7 +18,7 @@ module('Unit | Instance Initializer | config initializer', {
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  initialize(this.appInstance);
+  // initialize(this.appInstance);
 
   // you would normally confirm the results of the initializer here
   assert.ok(true);
