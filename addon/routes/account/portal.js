@@ -9,7 +9,7 @@ export default Route.extend({
   session: service(),
   'account-config': Ember.inject.service(),
   beforeModel() {
-    if (this.get('account-config').portalLink){
+    if (this.get('account-config').portalLink) {
       this.get('router').transitionTo(Object.keys(this.get('account-config').portalLink)[0]);
     }
   }
