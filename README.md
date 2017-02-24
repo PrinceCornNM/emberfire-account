@@ -84,23 +84,23 @@ links: {
 
 We use ember notify to send notifcation messages for cases of success and failure, for example: successfully updating a users email would send the notification "Successfully Updated Email!". Instructions on how to customize these messages and more can be found in the config settings portion of the README. Ember notify is a service that must be added to every page you need it, it is in each addon component and can be found there if needed. For more information visit [ember-notify](https://github.com/aexmachina/ember-notify#custom-animations).
 
-### Custom Routes
+### Routes
 
 If you want the custom routes add the router to your router and it gets mounted.
 
-### Custom Styling
+### Styling
 
 If you need custom styling do the following: write styling for ef-account, ef-account-sidebar, ef-account-form, ef-account-form-title, ef-account-form-input, buttons and all types of input you need. Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css. 
 
-### Custom Pages
+### Pages
 
 You can create custom pages by adding them to the account menu component. Custom links are specified in the config settings.
 
-#### Custom Account Portal
+#### Account Portal
 
 Creating your own account portal is as easy as changing the key and value of portalLink, found in config settings. 
 
-#### Custom Sign In Link
+#### Sign In Link
 
 If you need to change the default sign in link you can do this by removing the default link in signInLink, found in config settings, and adding your own.
 
