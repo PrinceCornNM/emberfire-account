@@ -114,6 +114,7 @@ If you need custom styling do the following: write styling for:
 * ef-account-form-title 
 * ef-account-form-input
 * buttons and all types of input you need. 
+
 Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css. 
 
 ### Pages
