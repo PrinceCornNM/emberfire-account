@@ -33,7 +33,8 @@ For more information on using ember-cli, visit [https://ember-cli.com/](https://
 ## Fastboot
 
 If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your parent app you must add:
-```  "fastbootDependencies": [
+```json  
+"fastbootDependencies": [
     "firebase",
     "emberfire-account"
   ]
