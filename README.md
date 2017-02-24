@@ -1,14 +1,10 @@
-# Ember Fire Account
-
-This README outlines the details of collaborating on this Ember addon, Ember Fire Account.
-
-## Features
+# Emberfire Account
 
 Ember Fire Account provides an account dashboard where users can modify their information (e.g. phone or address), an authentication helper called `re-authenticate` for selectively rendering content when a user is logged in, and account menu that displays links to all account pages. Links are currently defined in `account-menu.js`, so they can also be modified there.
 
 ## Installation
 
-* `ember install emberfire-account`
+`ember install emberfire-account`
 
 ## Customization
 
