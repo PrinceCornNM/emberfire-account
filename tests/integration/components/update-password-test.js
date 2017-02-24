@@ -28,7 +28,6 @@ const firebaseStub = Ember.Service.extend({
 });
 
 const configStub = Ember.Service.extend({
-  hardDelete: false,
   messages: {
     successfulUpdatePassword: 'You have successfully updated your password!',
     unsuccessfulUpdatePassword: 'We were unable to update your password.'
