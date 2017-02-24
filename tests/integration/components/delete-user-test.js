@@ -83,12 +83,13 @@ test('Clicking submit with an incorrect e-mail should return an error', function
   assert.equal(this.$('.form-field--errors').text(), 'Incorrect email. Please re-enter your e-mail.');
 });
 
-test(('If Reauthentication is required, that template should be loaded'), function(assert){
+test(('Correct submission, when reauthentication is needed, should trigger that'), function(assert){
   this.set("firebaseApp.needReauth", true);
   this.render(hbs`{{#delete-user}}{{/delete-user}}`);
 
   this.$('input').val("example@test.com").trigger('change');
   this.$('button').click();
 
+  assert.notEqual(this.$('.form-field--errors').text(), 'Incorrect email. Please re-enter your e-mail.');
   assert.ok(this.get("reauthenticate.shouldReauthenticate"));
 });

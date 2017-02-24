@@ -1,7 +1,8 @@
 {
   "name": "emberfire-account",
   "dependencies": {
-    "ember": "components/ember#lts-2-8"
+    "ember": "components/ember#lts-2-8",
+    "firebase": "^3.6.10"
   },
   "resolutions": {
     "ember": "lts-2-8"
