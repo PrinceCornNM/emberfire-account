@@ -8,44 +8,49 @@ Ember Fire Account provides an account dashboard where users can modify their in
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd emberfire-account`
-* `npm install`
-* `bower install`
+* `ember install emberfire-account`
 
-## Running
+## Customization
 
-* `ember server` (or the shortand, `ember s`)
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+### Account Info Form
 
-## Running Tests
+We have removed the account info form from the addon as this form can vary greatly depending on your needs. To make your own create your route and form template in your parent application and add this route to the config settings.
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+### Ember Notify
 
-## Building
+We use ember notify to send notifcation messages for cases of success and failure, for example: successfully updating a users email would send the notification "Successfully Updated Email!". Instructions on how to customize these messages and more can be found in the config settings portion of the README. Ember notify is a service that must be added to every page you need it, it is in each addon component and can be found there if needed. For more information visit [ember-notify](https://github.com/aexmachina/ember-notify#custom-animations).
 
-* `ember build`
+### Routes
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+If you want the custom routes add the router to your router and it gets mounted.
 
-## Fastboot
+### Styling
 
-If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your parent app you must add:
-```json  
-"fastbootDependencies": [
-    "firebase",
-    "emberfire-account"
-  ]
-```
-## Ember Form For 
+If you need custom styling do the following: write styling for: 
+* ef-account 
+* ef-account-sidebar
+* ef-account-form 
+* ef-account-form-title 
+* ef-account-form-input
+* buttons and all types of input you need. 
 
-We use ember-form-for to create our forms, read more about it [here](https://github.com/martndemus/ember-form-for).
+Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css in the styles folder. 
 
-## Re-Authenticate
+### Validations
 
-For the update password and email components we have implemented a re-authenticate service which checks to see if the user has been logged in for an extended period of time and if so prevents them from making any changes to email ans password until they enter their credentials again when prompted. Every component for which extra security is needed should have this service.
+Password has a minimum length of 8 and must be present, email must be present and its type must be email. Create your own validations by updating the files in the validations folder.
+
+### Pages
+
+You can create custom pages by adding them to the account menu component. Custom links are specified in the config settings.
+
+#### Account Portal
+
+Creating your own account portal is as easy as changing the key and value of portalLink, found in config settings. 
+
+#### Sign In Link
+
+If you need to change the default sign in link you can do this by removing the default link in signInLink, found in config settings, and adding your own.
 
 ## Config Settings
 
@@ -90,44 +95,33 @@ links: {
     }
 };
 ```
+## Re-Authenticate
 
-## Customization
+For the update password and email components we have implemented a re-authenticate service which checks to see if the user has been logged in for an extended period of time and if so prevents them from making any changes to email ans password until they enter their credentials again when prompted. Every component for which extra security is needed should have this service.
 
-### Account Info Form
+## Fastboot
 
-We have removed the account info form from the addon as this form can vary greatly depending on your needs. To make your own create your route and form template in your parent application and add this route to the config settings.
+If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your parent app you must add:
+```json  
+"fastbootDependencies": [
+    "firebase",
+    "emberfire-account"
+  ]
+```
+## Ember Form For 
 
-### Ember Notify
+We use ember-form-for to create our forms, read more about it [here](https://github.com/martndemus/ember-form-for).
 
-We use ember notify to send notifcation messages for cases of success and failure, for example: successfully updating a users email would send the notification "Successfully Updated Email!". Instructions on how to customize these messages and more can be found in the config settings portion of the README. Ember notify is a service that must be added to every page you need it, it is in each addon component and can be found there if needed. For more information visit [ember-notify](https://github.com/aexmachina/ember-notify#custom-animations).
+## Ember Changeset Validations
 
-### Routes
+We use ember-changeset-validations to validate our models before saving, read more about it [here](https://github.com/DockYard/ember-changeset-validations).
 
-If you want the custom routes add the router to your router and it gets mounted.
+## Running Tests
 
-### Styling
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 
-If you need custom styling do the following: write styling for: 
-* ef-account 
-* ef-account-sidebar
-* ef-account-form 
-* ef-account-form-title 
-* ef-account-form-input
-* buttons and all types of input you need. 
 
-Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css. 
 
-### Pages
-
-You can create custom pages by adding them to the account menu component. Custom links are specified in the config settings.
-
-#### Account Portal
-
-Creating your own account portal is as easy as changing the key and value of portalLink, found in config settings. 
-
-#### Sign In Link
-
-If you need to change the default sign in link you can do this by removing the default link in signInLink, found in config settings, and adding your own.
 
 
 
