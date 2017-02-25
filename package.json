@@ -4,7 +4,7 @@
   "description": "An ember-addon for using emberfire for accounts",
   "keywords": [
     "ember-addon",
-    "emberfire-account",
+    "emberfire-account"
   ],
   "license": "MIT",
   "author": "Conrad Lippert-Zajaczkowski, Mathew Vachaparambil, Julian Hyde, Taylor Stallworth, Viktor Köves",
