@@ -1,12 +1,13 @@
 {
   "name": "emberfire-account",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "An ember-addon for using emberfire for accounts",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "emberfire-account",
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Conrad Lippert-Zajaczkowski, Mathew Vachaparambil, Julian Hyde, Taylor Stallworth, Viktor Köves",
   "directories": {
     "doc": "doc",
     "test": "tests"
