@@ -1,8 +1,1 @@
-<div class="ef-account-form">
-	<h1 class="ef-account-form-title">Send Email Verification</h1>
-	{{#if isVerified.currentUser.emailVerified}}
-		<p>You have already verified your email</p>
-	{{else}}
-		<button class="common-button" {{action "sendEmailVerification"}}>Send Email</button>
-	{{/if}}
-</div>
+{{#verify-email}}{{/verify-email}}
