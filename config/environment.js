@@ -2,7 +2,11 @@
 'use strict';
 
 module.exports = function(environment) {
-  const ENV = {}
+  const ENV = {
+  	'emberfire-account': {
+  		hardDelete: false
+  	}
+  }
 
   return ENV;
 };
