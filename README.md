@@ -10,7 +10,9 @@ Ember Fire Account provides an account dashboard where users can modify their in
 
 ### Account Info Form
 
-We have removed the account info form from the addon as this form can vary greatly depending on your needs. To make your own create your route and form template in your parent application and add this route to the config settings.
+We have removed the account info form from the addon as this form can vary greatly depending on your needs. In order to make your own create the route and form template in your application and add this route to the config settings.
+
+Any page you need can be aded this way.
 
 ### Ember Notify
 
@@ -18,7 +20,19 @@ We use ember notify to send notifcation messages for cases of success and failur
 
 ### Routes
 
-If you want the custom routes add the router to your router and it gets mounted.
+If you want to add custom routes add the emberfire account router to your applications router and it gets mounted. You can also place your applications routes into the account router.
+
+```javascript
+import accountRouter from 'emberfire-account/router';
+import config from './config/environment';
+
+Router.map(function() {
+
+  accountRouter(this);
+  this.route('edit-user', { path: 'account/user' });
+  this.route('application-route');
+});
+```
 
 ### Styling
 
@@ -36,30 +50,16 @@ Each addon page is wrapped in the ef-account class, which is found in the accoun
 
 Password has a minimum length of 8 and must be present, email must be present and its type must be email. Create your own validations by updating the files in the validations folder.
 
-### Pages
+### Routes
 
-You can create custom pages by adding them to the account menu component. Custom links are specified in the config settings.
-
-#### Account Portal
-
-Creating your own account portal is as easy as changing the key and value of portalLink, found in config settings. 
-
-#### Sign In Link
-
-If you need to change the default sign in link you can do this by removing the default link in signInLink, found in config settings, and adding your own.
+Add your own links by declaring them in the account configuration below. You can also specify routes that link back to your application this way. 
 
 ## Config Settings
 
-Can be found in app/instance-initializers. The config initializer specifies default links and messages of the addon. These can be overridden simply by changing their values or adding your customizations to the ENV in the environment.js of your parent application. Account config must be injected as a service everywhere you need to use it, you can see it used in each component of the addon. Settings that can be overridden include:
+Can be found in app/instance-initializers. The config initializer specifies default links and messages of the addon. These can be overridden simply by changing their values or adding your customizations to the ENV in the environment.js of your application. Account config must be injected as a service everywhere you need to use it, you can see it used in each component of the addon. Settings that can be overridden include:
 ```javascript
-const DEFAULT_CONFIG = {
+const EMBERFIRE_ACCOUNT_CONFIGURATION = {
   hardDelete: false,
-  links: {
-    'account.delete': 'Delete Account',
-    'account.email': 'Update Email',
-    'account.password': 'Change Password',
-    'account.verify-email': 'Send Email Verification'
-  },
   messages: {
     successfulLogin: 'You have logged in successfully!',
     unsuccessfulLogin: 'You were unable to log in.',
@@ -76,19 +76,19 @@ const DEFAULT_CONFIG = {
     successfulCreateAccount: 'You have created an account successfully!',
     unsuccessfulCreateAccount: 'We were unable to create your account.'
   },
-links: {
-      'edit-user': 'Edit User Info',
-      'account.email': 'Update Email',
-      'account.delete': 'Delete Account',
-      'account.password': 'Change Password',
-      'account.verify-email': 'Send Email Verification'
-    },
-    signInLink: {
-      signin: 'Log In'
-    },
-    portalLink: {
-      'edit-user': 'Portal'
-    }
+  links: {
+    'account.link': 'Link', *You can provide custom routes here*
+    'account.email': 'Update Email',
+    'account.delete': 'Delete Account',
+    'emberire.account.password': 'Change Password',
+    'account.verify-email': 'Send Email Verification'
+  },
+  signInLink: {
+    application.signin: 'Log In'
+  },
+  portalLink: {
+    'account.portal': 'Portal'
+  }
 };
 ```
 ## Re-Authenticate
@@ -97,7 +97,7 @@ For the update password and email components we have implemented a re-authentica
 
 ## Fastboot
 
-If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your parent app you must add:
+If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your app you must add:
 ```json  
 "fastbootDependencies": [
     "firebase",
