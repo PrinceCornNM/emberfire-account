@@ -36,15 +36,15 @@ Router.map(function() {
 
 ### Styling
 
-If you need custom styling do the following: write styling for: 
-* ef-account 
+If you need custom styling do the following: write styling for:
+* ef-account
 * ef-account-sidebar
-* ef-account-form 
-* ef-account-form-title 
+* ef-account-form
+* ef-account-form-title
 * ef-account-form-input
-* buttons and all types of input you need. 
+* buttons and all types of input you need.
 
-Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css in the styles folder. 
+Each addon page is wrapped in the ef-account class, which is found in the account template. The side-bar also exists within this template as it is on every page. The other classes are found in each individual account component template. The styling for the app can be found in app.css in the styles folder.
 
 ### Validations
 
@@ -52,14 +52,15 @@ Password has a minimum length of 8 and must be present, email must be present an
 
 ### Routes
 
-Add your own links by declaring them in the account configuration below. You can also specify routes that link back to your application this way. 
+Add your own links by declaring them in the account configuration below. You can also specify routes that link back to your application this way.
 
 ## Config Settings
 
-Can be found in app/instance-initializers. The config initializer specifies default links and messages of the addon. These can be overridden simply by changing their values or adding your customizations to the ENV in the environment.js of your application. Account config must be injected as a service everywhere you need to use it, you can see it used in each component of the addon. Settings that can be overridden include:
+Can be found in app/instance-initializers. The config initializer specifies default links and messages of the addon. These can be overridden simply by changing their values or adding your customizations to the ENV in the environment.js of your application. `hardDelete` if set to `true` deletes the user in the authentication as well as the realtime database. If set to `false` it only deletes the user from the authentication panel. `email` specifies where to store the user's email if they change it. If `email` is not present the email is not updated on the user store in the realtime database. Account config must be injected as a service everywhere you need to use it, you can see it used in each component of the addon. Settings that can be overridden include:
 ```javascript
 const EMBERFIRE_ACCOUNT_CONFIGURATION = {
   hardDelete: false,
+  email: 'email',
   messages: {
     successfulLogin: 'You have logged in successfully!',
     unsuccessfulLogin: 'You were unable to log in.',
@@ -98,13 +99,13 @@ For the update password and email components we have implemented a re-authentica
 ## Fastboot
 
 If you are using fastboot you must add the emberfire-account addon to fastboot dependencies. In package.json of your app you must add:
-```json  
+```json
 "fastbootDependencies": [
     "firebase",
     "emberfire-account"
   ]
 ```
-## Ember Form For 
+## Ember Form For
 
 We use ember-form-for to create our forms, read more about it [here](https://github.com/martndemus/ember-form-for).
 
