@@ -6,6 +6,10 @@ Ember Fire Account provides an account dashboard where users can modify their in
 
 `ember install emberfire-account`
 
+#### Installing Firebase
+
+Once you have installed the add on, install firebase by running 'bower install firebase --save'
+
 ## Customization
 
 ### Account Info Form
