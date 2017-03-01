@@ -7,7 +7,6 @@
   float: right;
   display: inline-block;
   padding: 3% 0%;
-  background-color: #292929;
   margin: auto;
   text-align: center;
   width: 80%;
@@ -29,4 +28,19 @@
   float: right;
   width: 50%;
   margin-right: 10%;
+}
+.menu-section {
+  display: inline-block;
+}
+.account-btn {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    width: 200px;
+    text-align: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.account-btn-cont {
+    display: inline-block;
 }
