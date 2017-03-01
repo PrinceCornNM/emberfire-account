@@ -62,7 +62,8 @@ Add your own links by declaring them in the account configuration below. You can
 
 Can be found in app/instance-initializers. The config initializer specifies default links and messages of the addon. These can be overridden simply by changing their values or adding your customizations to the ENV in the environment.js of your application. `hardDelete` if set to `true` deletes the user in the authentication as well as the realtime database. If set to `false` it only deletes the user from the authentication panel. `email` specifies where to store the user's email if they change it. If `email` is not present the email is not updated on the user store in the realtime database. Account config must be injected as a service everywhere you need to use it, you can see it used in each component of the addon. Settings that can be overridden include:
 ```javascript
-const EMBERFIRE_ACCOUNT_CONFIGURATION = {
+// in config/environment.js
+'emberfire-account':  {
   hardDelete: false,
   email: 'email',
   messages: {
