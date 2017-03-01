@@ -85,7 +85,7 @@ const EMBERFIRE_ACCOUNT_CONFIGURATION = {
     'account.link': 'Link', *You can provide custom routes here*
     'account.email': 'Update Email',
     'account.delete': 'Delete Account',
-    'emberire.account.password': 'Change Password',
+    'account.password': 'Change Password',
     'account.verify-email': 'Send Email Verification'
   },
   signInLink: {
