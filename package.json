@@ -12,7 +12,8 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/PrinceCornNM/emberfire-account",
+  "homepage": "https://github.com/PrinceCornNM/emberfire-account",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
