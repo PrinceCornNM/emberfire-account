@@ -9,17 +9,5 @@ export default Ember.Component.extend({
   'account-config': Ember.inject.service(),
   links: Ember.computed('account-config.links', function() {
     return this.get('account-config.links');
-  }),
-  init() {
-    this._super();
-    const scope = this;
-    // window.service = this.get('accountConfig');
-    if(this.get('links')){
-      Object.keys( this.get('links')).forEach((l) => {
-        if (l === scope.get('router.currentRouteName')) {
-          // l.condition = true;
-        }
-      });
-    }
-  }
+  })
 });
