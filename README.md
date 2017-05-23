@@ -16,7 +16,7 @@ Once you have installed the add on, install firebase by running 'bower install f
 
 We have removed the account info form from the addon as this form can vary greatly depending on your needs. In order to make your own create the route and form template in your application and add this route to the config settings.
 
-Any page you need can be aded this way.
+Any page you need can be added this way.
 
 ### Ember Notify
 
