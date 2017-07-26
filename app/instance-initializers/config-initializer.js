@@ -24,7 +24,8 @@ const DEFAULT_CONFIG = {
       successfulLogout: 'You are now logged out!',
       unsuccessfulLogout: 'We were unable to log out of your account.',
       successfulCreateAccount: 'You have created an account successfully!',
-      unsuccessfulCreateAccount: 'We were unable to create your account.'
+      unsuccessfulCreateAccount: 'We were unable to create your account.',
+      currentEmailPrompt: 'Your current account email adress is: '
     }
 };
 

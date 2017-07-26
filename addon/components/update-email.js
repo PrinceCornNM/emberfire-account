@@ -59,5 +59,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     this.email = new Changeset({email: '', emailConfirmation: ''}, lookupValidator(EmailValidations), EmailValidations);
+    this.currentEmail = this.get('firebaseApp').auth().currentUser.email;
+    this.currentEmailPrompt = this.get('account-config').messages['currentEmailPrompt'];
   }
 });

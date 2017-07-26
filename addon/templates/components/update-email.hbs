@@ -4,6 +4,7 @@
 		{{#re-authenticate}}{{/re-authenticate}}
 	{{else}}
 		{{#form-for email submit=(action 'updateEmail') as |f|}}
+			<div>{{{currentEmailPrompt}}}{{currentEmail}}</div>
 			<div class="ef-account-form-input">
 				{{f.email-field "email" label="Email" }}
 				<br>
