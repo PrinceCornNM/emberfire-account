@@ -25,7 +25,8 @@ const DEFAULT_CONFIG = {
       unsuccessfulLogout: 'We were unable to log out of your account.',
       successfulCreateAccount: 'You have created an account successfully!',
       unsuccessfulCreateAccount: 'We were unable to create your account.',
-      currentEmailPrompt: 'Your current account email adress is: '
+      currentEmailPrompt: 'Your current account email adress is: ',
+      incorrectPassword: 'That is an incorrect password.'
     }
 };
 
