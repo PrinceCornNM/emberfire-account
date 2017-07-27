@@ -1,6 +1,6 @@
 <div class="ef-account-form">
 	<h1 class="ef-account-form-title">Delete Account</h1>
-	{{#form-for delete_form submit=(action 'deleteUser') as |f|}}
+	{{#form-for deleteForm submit=(action 'deleteUser') as |f|}}
 		<div class="ef-account-form-input">
 			{{f.password-field "currentPassword" label="Current Password" }}
 		</div>
