@@ -8,7 +8,7 @@ import firebase from 'firebase';
 const {
   inject: { service },
   Component,
-  Logger,
+  Logger: { log },
   get,
   set
 } = Ember;
@@ -55,11 +55,11 @@ export default Component.extend({
             }
 
           } catch(error) {
-            Logger.log(error);
+            log(error);
             get(scope, 'notify').alert(config.messages.unsuccessfulUpdateEmail);
           }
         } catch(error) {
-          Logger.log(error);
+          log(error);
           get(scope, 'notify').alert(config.messages.incorrectPassword);
         }
       }
