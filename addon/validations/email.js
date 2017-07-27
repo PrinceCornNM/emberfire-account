@@ -3,13 +3,13 @@ import {
   validatePresence,
   validateFormat,
   // validateLength,
-  validateConfirmation,
+  validateConfirmation
 } from 'ember-changeset-validations/validators';
 
 export default {
   email: [
     validatePresence(true),
-    validateFormat({type: 'email'})
+    validateFormat({ type: 'email' })
   ],
   emailConfirmation: validateConfirmation({ on: 'email' })
 };

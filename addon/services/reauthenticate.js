@@ -5,5 +5,5 @@ const {
 } = Ember;
 
 export default Service.extend({
-  shouldReauthenticate: false,
+  shouldReauthenticate: false
 });
