@@ -10,7 +10,7 @@ const {
   get,
   set,
   inject: { service },
-  Logger
+  Logger: { log }
 } = Ember;
 
 export default Component.extend({
@@ -45,11 +45,11 @@ export default Component.extend({
           // reauthenticated the user for the next operation
           set(get(scope, 'reauthenticate'), 'shouldReauthenticate', false);
         } catch(error) {
-          Logger.log(error);
+          log(error);
           get(scope, 'notify').alert(config.messages.unsuccessfulLogin);
         }
       } catch(error) {
-        Logger.log(error);
+        log(error);
       }
     }
   }

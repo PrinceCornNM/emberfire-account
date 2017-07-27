@@ -1,15 +1,15 @@
 <div class="ef-account-form">
-	{{#if reauthenticate.shouldReauthenticate}}
-		<h1 class="ef-account-form-title">It's been a long time since you last logged in so for security please re-enter your credentials.</h1>
-	  {{#form-for creds submit=(action 'reauthenticate') class="reauthenticate-form" as |f|}}
-		  <div class="ef-account-form-input">
-		    {{f.text-field "email" label="Email"}}
-		    <br>
-		    {{f.password-field "password" label="Password"}}
-		  </div>
-		    {{f.submit "Sign In" class="common-button"}}
-	  {{/form-for}}
-	{{else}}
-	  {{yield}}
-	{{/if}}
+  {{#if reauthenticate.shouldReauthenticate}}
+    <h1 class="ef-account-form-title">It's been a long time since you last logged in so for security please re-enter your credentials.</h1>
+    {{#form-for creds submit=(action 'reauthenticate') class="reauthenticate-form" as |f|}}
+      <div class="ef-account-form-input">
+        {{f.text-field "email" label="Email"}}
+        <br>
+        {{f.password-field "password" label="Password"}}
+      </div>
+      {{f.submit "Sign In" class="common-button"}}
+    {{/form-for}}
+  {{else}}
+    {{yield}}
+  {{/if}}
 </div>
