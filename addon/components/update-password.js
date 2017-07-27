@@ -8,7 +8,7 @@ import firebase from 'firebase';
 const {
   Component,
   inject: { service },
-  Logger,
+  Logger: { log },
   get
 } = Ember;
 
@@ -43,12 +43,12 @@ export default Component.extend({
             await get(scope, 'firebaseApp').auth().currentUser.updatePassword(get(form, 'password'));
             get(scope, 'notify').success(config.messages.successfulUpdatePassword);
           } catch(error) {
-            Logger.log(error);
+            log(error);
             get(scope, 'notify').alert(config.messages.unsuccessfulUpdatePassword);
           }
 
         } catch(error) {
-          Logger.log(error);
+          log(error);
           get(scope, 'notify').alert(config.messages.incorrectPassword);
         }
       }
