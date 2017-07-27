@@ -1,5 +1,7 @@
 import Ember from 'ember';
+import Changeset from 'ember-changeset';
 import layout from '../templates/components/delete-user';
+import firebase from 'firebase';
 
 export default Ember.Component.extend({
   layout,
@@ -9,50 +11,83 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   notify: Ember.inject.service(),
   'account-config': Ember.inject.service(),
-  reauthenticate: Ember.inject.service(),
   hasError: false,
+
   actions: {
-    deleteUser(form){
+    deleteUser(form) {
       const scope = this,
-            config = scope.get('account-config'),
-            user = this.get('firebaseApp').auth().currentUser;
+        config = scope.get('account-config'),
+        user = this.get('firebaseApp').auth().currentUser;
+
       return new Ember.RSVP.Promise(function(resolve, reject) {
-        if(user && user.email === form.email){
-          if(config.hardDelete){
-            scope.get('store').findRecord("user", user.uid).then((rec) => {
-              rec.destroyRecord();
-              scope.get('notify').success(config.messages['successfulDeleteAccount']);
-            });
-          }
-          user.delete().then(() => {
-            scope.get('session').close().then(() => {
-              scope.get('router').transitionTo('index');
-              resolve();
-            }, reject);
-          }, (error) => {
-            if(error.code === 'auth/requires-recent-login') {
+        if(scope.get('session.isAuthenticated')) {
+          const currentUser = scope.get('firebaseApp').auth().currentUser;
+
+          // Get credentials for reauthentication via the user email and the entered password
+          let credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, form.get('currentPassword'));
+
+          currentUser.reauthenticate(credential).then(() => {
+
+            scope.get('store').findRecord('user', currentUser.uid).then((record) => {
+              if(config.hardDelete) {
+                // if hard deleting, destroy the user
+                rec.destroyRecord();
+
+                user.delete().then(() => {
+                  scope.get('session').close().then(() => {
+                    scope.get('router').transitionTo('index');
+                    scope.get('notify').success(config.messages['successfulDeleteAccount']);
+                    resolve();
+                  }, reject);
+                }, (error) => {
+                  Ember.Logger.log(error);
+                  scope.get('notify').alert(config.messages['unsuccessfulDeleteAccount']);
+                  reject();
+                });
+              }
+              else {
+                // if not hard deleting the user, flag the account as deleted
+                if(config.deleted)
+                  record.set(config.deleted, true);
+
+                record.save().then(() => {
+                  user.delete().then(() => {
+                    scope.get('session').close().then(() => {
+                      scope.get('router').transitionTo('index');
+                      scope.get('notify').success(config.messages['successfulDeleteAccount']);
+                      resolve();
+                    }, reject);
+                  }, (error) => {
+                    Ember.Logger.log(error);
+                    scope.get('notify').alert(config.messages['unsuccessfulDeleteAccount']);
+                    reject();
+                  });
+
+                  resolve();
+                }, (error) => {
+                  scope.get('notify').alert(config.messages['successfulDeleteAccount']);
+                  reject();
+                });
+              }
+            }, (error) => {
+              Ember.Logger.log(error);
               scope.get('notify').alert(config.messages['unsuccessfulDeleteAccount']);
-              scope.get('reauthenticate').set('shouldReauthenticate', true);
-            }
+              reject();
+            });
+
+          }, (error) => {
+            Ember.Logger.log(error);
+            scope.get('notify').alert(scope.get('account-config').messages['incorrectPassword']);
             reject();
           });
         }
-        else {
-          if(!scope.get("hasError")){
-            scope.get('notify').alert(config.messages['unsuccessfulDeleteAccount']);
-            Ember.$('.ef-account-form-input').append('<div class="form-field--errors">Incorrect email. Please re-enter your e-mail.</div>');
-            scope.set("hasError", true);
-          }
-          reject();
-        }
+
+        reject();
       });
     }
   },
-  shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
-    return this.get('reauthenticate.shouldReauthenticate');
-  }),
   init() {
     this._super(...arguments);
-    this.delete_form = {email: ''};
+    this.delete_form = new Changeset({currentPassword: ''});
   }
 });
