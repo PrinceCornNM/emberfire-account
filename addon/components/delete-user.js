@@ -8,7 +8,7 @@ const {
   inject: { service },
   get,
   set,
-  Logger
+  Logger: { log }
 } = Ember;
 
 export default Component.extend({
@@ -65,11 +65,11 @@ export default Component.extend({
               get(scope, 'notify').success(config.messages.successfulDeleteAccount);
             }
           } catch(error) {
-            Logger.log(error);
+            log(error);
             get(scope, 'notify').alert(config.messages.unsuccessfulDeleteAccount);
           }
         } catch(error) {
-          Logger.log(error);
+          log(error);
           get(scope, 'notify').alert(config.messages.incorrectPassword);
         }
       }
