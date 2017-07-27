@@ -5,70 +5,64 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
-export default Ember.Component.extend({
+const {
+  inject: { service },
+  Component,
+  Logger: { log },
+  get,
+  set
+} = Ember;
+
+export default Component.extend({
+  firebaseApp: service(),
+  session: service(),
+  notify: service(),
+  'account-config': service(),
+  store: service(),
   layout,
-  classNames: ['update-email-component'],
-  firebaseApp: Ember.inject.service(),
-  session: Ember.inject.service(),
-  notify: Ember.inject.service(),
-  'account-config': Ember.inject.service(),
-  store: Ember.inject.service(),
-  actions: {
-    updateEmail(form) {
-      const scope = this;
-      return new Ember.RSVP.Promise(function(resolve, reject) {
-        if (scope.get('session.isAuthenticated') && scope.get('email').get('isValid')) {
-          const currentUser = scope.get('firebaseApp').auth().currentUser;
-
-          // Get credentials for reauthentication via the user email and the entered password
-          const credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, form.get('currentPassword'));
-
-          currentUser.reauthenticate(credential).then(() => {
-
-            currentUser.updateEmail(form.get('email')).then(() => {
-              if (scope.get('account-config').email) {
-                scope.get('store').findRecord('user', currentUser.uid).then((data) => {
-                  data.set(scope.get('account-config').email, form.get('email'));
-
-                  data.save().then(() => {
-                    scope.get('notify').success(scope.get('account-config').messages['successfulUpdateEmail']);
-                    resolve();
-                  }, (error) => {
-                    scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
-                    reject();
-                  });
-
-                }, (error) => {
-                  scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
-                  reject();
-                });
-              }
-              else {
-                scope.get('notify').success(scope.get('account-config').messages['successfulUpdateEmail']);
-                resolve();
-              }
-            }, (error) => {
-              Ember.Logger.log(error);
-              scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdateEmail']);
-              reject();
-            });
-
-          }, (error) => {
-            Ember.Logger.log(error);
-            scope.get('notify').alert(scope.get('account-config').messages['incorrectPassword']);
-            reject();
-          });
-        }
-
-        reject();
-      });
-    }
-  },
   EmailValidations,
+
   init() {
     this._super(...arguments);
-    this.email = new Changeset({email: '', emailConfirmation: '', currentPassword: ''}, lookupValidator(EmailValidations), EmailValidations);
-    this.currentEmail = this.get('firebaseApp').auth().currentUser.email;
-    this.currentEmailPrompt = this.get('account-config').messages['currentEmailPrompt'];
+    this.email = new Changeset({ email: '', emailConfirmation: '', currentPassword: '' }, lookupValidator(EmailValidations), EmailValidations);
+    this.currentEmail = get(this, 'firebaseApp').auth().currentUser.email;
+    this.currentEmailPrompt = get(this, 'account-config').messages.currentEmailPrompt;
+    this.classNames = ['update-email-component'];
+  },
+
+  actions: {
+    async updateEmail(form) {
+      let scope = this;
+      let config = get(scope, 'account-config');
+
+      if (get(scope, 'session.isAuthenticated') && get(get(scope, 'email'), 'isValid')) {
+        let currentUser = get(scope, 'firebaseApp').auth().currentUser; // eslint-disable-line ember-suave/prefer-destructuring
+
+        // Get credentials for reauthentication via the user email and the entered password
+        let credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, get(form, 'currentPassword'));
+
+        try {
+          await currentUser.reauthenticate(credential);
+
+          try {
+            await currentUser.updateEmail(get(form, 'email'));
+
+            if (config.email) {
+              let userRecord = await get(scope, 'store').findRecord('user', currentUser.uid);
+              set(userRecord, config.email, get(form, 'email'));
+              await userRecord.save();
+              get(scope, 'notify').success(config.messages.successfulUpdateEmail);
+            }
+
+          } catch(error) {
+            log(error);
+            get(scope, 'notify').alert(config.messages.unsuccessfulUpdateEmail);
+          }
+        } catch(error) {
+          log(error);
+          get(scope, 'notify').alert(config.messages.incorrectPassword);
+        }
+      }
+    }
   }
 });

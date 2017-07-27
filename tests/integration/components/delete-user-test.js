@@ -3,54 +3,61 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
-const firebaseStub = Ember.Service.extend({
-  auth(){
-    let reauth = this.get('needReauth');
+const {
+  Service,
+  RSVP,
+  get,
+  set
+} = Ember;
+
+const firebaseStub = Service.extend({
+  needReauth: false,
+  auth() {
+    let reauth = get(this, 'needReauth');
     return {
       currentUser: {
-        email: "example@test.com",
-        delete(){
-          return new Ember.RSVP.Promise((resolve, reject) => {
-            if (reauth){
-              reject({code: 'auth/requires-recent-login'});
-            }else{
+        email: 'example@test.com',
+        delete() {
+          return new RSVP.Promise((resolve, reject) => {
+            if (reauth) {
+              reject({ code: 'auth/requires-recent-login' });
+            } else {
               resolve();
             }
           });
-        },
+        }
       }
     };
-  },
-  needReauth: false
+  }
 });
 
-const notifyStub = Ember.Service.extend({
-  alert(message){
+const notifyStub = Service.extend({
+  alert(message) {
     return message;
   }
 });
 
-const configStub = Ember.Service.extend({
+const configStub = Service.extend({
   hardDelete: false,
-  messages: {
+  messages: { // eslint-disable-line ember/avoid-leaking-state-in-components
     unsuccessfulDeleteAccount: 'We were unable to delete your account.',
     successfulDeleteAccount: 'You have successfully deleted your account!'
   }
 });
 
-const reauthenticateStub = Ember.Service.extend({
+const reauthenticateStub = Service.extend({
   shouldReauthenticate: false
 });
 
-// const routerStub = Ember.Service.extend({
-//   transitionTo(route){
+// const routerStub = Service.extend({
+//   transitionTo(route) {
 //     return route;
 //   }
 // });
 
 moduleForComponent('delete-user', 'Integration | Component | delete user', {
   integration: true,
-  beforeEach: function(){
+  beforeEach() {
     this.register('service:firebaseApp', firebaseStub);
     this.inject.service('firebaseApp');
 
@@ -74,7 +81,7 @@ test('Clicking submit without an e-mail should return an error', function(assert
   assert.equal(this.$('.form-field--errors').text(), 'Incorrect email. Please re-enter your e-mail.');
 });
 
-test('Clicking submit with an incorrect e-mail should return an error', function(assert){
+test('Clicking submit with an incorrect e-mail should return an error', function(assert) {
   this.render(hbs`{{#delete-user}}{{/delete-user}}`);
 
   this.$('input').val('wrong@email.com').trigger('change');
@@ -83,13 +90,13 @@ test('Clicking submit with an incorrect e-mail should return an error', function
   assert.equal(this.$('.form-field--errors').text(), 'Incorrect email. Please re-enter your e-mail.');
 });
 
-test(('Correct submission, when reauthentication is needed, should trigger that'), function(assert){
-  this.set("firebaseApp.needReauth", true);
+test(('Correct submission, when reauthentication is needed, should trigger that'), function(assert) {
+  set(this, 'firebaseApp.needReauth', true);
   this.render(hbs`{{#delete-user}}{{/delete-user}}`);
 
-  this.$('input').val("example@test.com").trigger('change');
+  this.$('input').val('example@test.com').trigger('change');
   this.$('button').click();
 
   assert.notEqual(this.$('.form-field--errors').text(), 'Incorrect email. Please re-enter your e-mail.');
-  assert.ok(this.get("reauthenticate.shouldReauthenticate"));
+  assert.ok(get(this, 'reauthenticate.shouldReauthenticate'));
 });
