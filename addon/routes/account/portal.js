@@ -2,15 +2,17 @@ import Ember from 'ember';
 
 const {
   inject: { service },
-  Route
+  Route,
+  get
 } = Ember;
 
 export default Route.extend({
   session: service(),
-  'account-config': Ember.inject.service(),
+  'account-config': service(),
+
   beforeModel() {
-    if (this.get('account-config').portalLink) {
-      this.get('router').transitionTo(Object.keys(this.get('account-config').portalLink)[0]);
+    if (get(this, 'account-config').portalLink) {
+      get(this, 'router').transitionTo(Object.keys(get(this, 'account-config').portalLink)[0]);
     }
   }
 });

@@ -1,15 +1,14 @@
 <div class="ef-account-form">
-	<h1 class="ef-account-form-title">Update Email</h1>
-	{{#if shouldReauthenticate}}
-		{{#re-authenticate}}{{/re-authenticate}}
-	{{else}}
-		{{#form-for email submit=(action 'updateEmail') as |f|}}
-			<div class="ef-account-form-input">
-				{{f.email-field "email" label="Email" }}
-				<br>
-				{{f.email-field "emailConfirmation" label="Email Confirmation" }}
-			</div>
-			{{f.submit "Update Info" class="common-button"}}
-		{{/form-for}}
-	{{/if}}
+  <h1 class="ef-account-form-title">Update Email</h1>
+  {{#form-for email submit=(action 'updateEmail') as |f|}}
+    <div class="ef-account-caption">{{{currentEmailPrompt}}}{{currentEmail}}</div>
+    <div class="ef-account-form-input">
+      {{f.password-field "currentPassword" label="Current Password" }}
+      <br>
+      {{f.email-field "email" label="Email" }}
+      <br>
+      {{f.email-field "emailConfirmation" label="Email Confirmation" }}
+    </div>
+    {{f.submit "Update Info" class="common-button"}}
+  {{/form-for}}
 </div>

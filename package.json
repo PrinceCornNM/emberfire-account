@@ -26,10 +26,10 @@
     "ember-cli-mocha": "0.14.4",
     "ember-data": "2.11.0",
     "ember-form-for": "2.0.0-alpha.15",
-    "ember-notify": "5.2.0",
     "emberfire": "firebase/emberfire"
   },
   "devDependencies": {
+    "ember-notify": "5.2.0",
     "broccoli-asset-rev": "2.4.5",
     "ember-ajax": "2.4.1",
     "ember-cli": "2.11.1",

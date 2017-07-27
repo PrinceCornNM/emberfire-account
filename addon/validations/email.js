@@ -3,7 +3,7 @@ import {
   validatePresence,
   // validateFormat,
   // validateLength,
-  validateConfirmation,
+  validateConfirmation
 } from 'ember-changeset-validations/validators';
 import validateEmail from '../validators/email';
 

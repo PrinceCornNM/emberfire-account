@@ -2,15 +2,17 @@ import Ember from 'ember';
 
 const {
   Route,
-  inject: { service }
+  inject: { service },
+  get
 } = Ember;
 
 export default Route.extend({
   session: service(),
-  'account-config': Ember.inject.service(),
+  'account-config': service(),
+
   beforeModel() {
-    if (this.get('account-config').signInLink && !this.get('session.isAuthenticated')){
-      this.get('router').transitionTo(Object.keys(this.get('account-config').signInLink)[0]);
+    if (get(this, 'account-config').signInLink && !get(this, 'session.isAuthenticated')) {
+      get(this, 'router').transitionTo(Object.keys(get(this, 'account-config').signInLink)[0]);
     }
   }
 });

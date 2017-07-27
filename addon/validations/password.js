@@ -2,7 +2,7 @@
 import {
   validatePresence,
   validateLength,
-  validateConfirmation,
+  validateConfirmation
 } from 'ember-changeset-validations/validators';
 
 export default {

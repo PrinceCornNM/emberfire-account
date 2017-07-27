@@ -3,40 +3,55 @@ import layout from '../templates/components/update-password';
 import PasswordValidations from '../validations/password';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
+import firebase from 'firebase';
 
-export default Ember.Component.extend({
+const {
+  Component,
+  inject: { service },
+  Logger: { log },
+  get
+} = Ember;
+
+export default Component.extend({
+  firebaseApp: service(),
+  session: service(),
+  notify: service(),
+  'account-config': service(),
   layout,
-  classNames: ['update-password-component'],
-  firebaseApp: Ember.inject.service(),
-  session: Ember.inject.service(),
-  notify: Ember.inject.service(),
-  'account-config': Ember.inject.service(),
-  reauthenticate: Ember.inject.service(),
-  actions: {
-    updatePassword(form) {
-      const scope = this;
-      return new Ember.RSVP.Promise(function(resolve, reject) {
-        if (scope.get('session.isAuthenticated') && scope.get('password').get('isValid')) {
-          scope.get('firebaseApp').auth().currentUser.updatePassword(form.get('password')).then(() => {
-            scope.get('notify').success(scope.get('account-config').messages['successfulUpdatePassword']);
-            resolve();
-          }, (error) => {
-            if(error.code === 'auth/requires-recent-login') {
-              scope.get('notify').alert(scope.get('account-config').messages['unsuccessfulUpdatePassword']);
-              scope.get('reauthenticate').set('shouldReauthenticate', true);
-            }
-            reject();
-          });
-        }
-        reject();
-      });
-    }
-  },
-  shouldReauthenticate: Ember.computed('reauthenticate.shouldReauthenticate', function() {
-    return this.get('reauthenticate.shouldReauthenticate');
-  }),
+
   init() {
     this._super();
-    this.password = new Changeset({password: '', passwordConfirmation: ''}, lookupValidator(PasswordValidations), PasswordValidations);
+    this.password = new Changeset({ password: '', passwordConfirmation: '', currentPassword: '' }, lookupValidator(PasswordValidations), PasswordValidations);
+    this.classNames = ['update-password-component'];
+  },
+
+  actions: {
+    async updatePassword(form) {
+      let scope = this;
+      let config = get(scope, 'account-config');
+
+      if (get(scope, 'session.isAuthenticated') && get(get(scope, 'password'), 'isValid')) {
+        let currentUser = get(scope, 'firebaseApp').auth().currentUser; // eslint-disable-line ember-suave/prefer-destructuring
+
+        // Get credentials for reauthentication via the user email and the entered password
+        let credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, get(form, 'currentPassword'));
+
+        try {
+          await currentUser.reauthenticate(credential);
+
+          try {
+            await get(scope, 'firebaseApp').auth().currentUser.updatePassword(get(form, 'password'));
+            get(scope, 'notify').success(config.messages.successfulUpdatePassword);
+          } catch(error) {
+            log(error);
+            get(scope, 'notify').alert(config.messages.unsuccessfulUpdatePassword);
+          }
+
+        } catch(error) {
+          log(error);
+          get(scope, 'notify').alert(config.messages.incorrectPassword);
+        }
+      }
+    }
   }
 });
