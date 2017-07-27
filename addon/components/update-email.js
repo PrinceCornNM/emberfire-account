@@ -6,7 +6,7 @@ import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
 const {
-  inject,
+  inject: { service },
   Component,
   Logger,
   get,
@@ -14,11 +14,11 @@ const {
 } = Ember;
 
 export default Component.extend({
-  firebaseApp: inject.service(),
-  session: inject.service(),
-  notify: inject.service(),
-  'account-config': inject.service(),
-  store: inject.service(),
+  firebaseApp: service(),
+  session: service(),
+  notify: service(),
+  'account-config': service(),
+  store: service(),
   layout,
   EmailValidations,
 

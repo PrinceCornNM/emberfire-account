@@ -7,16 +7,16 @@ import firebase from 'firebase';
 
 const {
   Component,
-  inject,
+  inject: { service },
   Logger,
   get
 } = Ember;
 
 export default Component.extend({
-  firebaseApp: inject.service(),
-  session: inject.service(),
-  notify: inject.service(),
-  'account-config': inject.service(),
+  firebaseApp: service(),
+  session: service(),
+  notify: service(),
+  'account-config': service(),
   layout,
 
   init() {

@@ -3,15 +3,15 @@ import layout from '../templates/components/verify-email';
 
 const {
   Component,
-  inject,
+  inject: { service },
   get,
   set
 } = Ember;
 
 export default Component.extend({
-  firebaseApp: inject.service(),
-  notify: inject.service(),
-  'account-config': inject.service(),
+  firebaseApp: service(),
+  notify: service(),
+  'account-config': service(),
   isVerified: false,
   layout,
 

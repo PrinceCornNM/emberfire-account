@@ -4,7 +4,7 @@
 	  {{#form-for creds submit=(action 'reauthenticate') class="reauthenticate-form" as |f|}}
 		  <div class="ef-account-form-input">
 		    {{f.text-field "email" label="Email"}}
-		   	<br>
+		    <br>
 		    {{f.password-field "password" label="Password"}}
 		  </div>
 		    {{f.submit "Sign In" class="common-button"}}
