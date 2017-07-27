@@ -76,7 +76,6 @@ export default Ember.Component.extend({
             });
 
           }, (error) => {
-            Ember.Logger.log("ERROR 1");
             Ember.Logger.log(error);
             scope.get('notify').alert(scope.get('account-config').messages['incorrectPassword']);
             reject();
