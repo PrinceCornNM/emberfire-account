@@ -1,6 +1,8 @@
 import Ember from 'ember';
-import Changeset from 'ember-changeset';
 import layout from '../templates/components/delete-user';
+import DeleteAccountValidation from '../validations/delete-account';
+import Changeset from 'ember-changeset';
+import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
 const {
@@ -19,10 +21,11 @@ export default Component.extend({
   'account-config': service(),
   hasError: false,
   layout,
+  DeleteAccountValidation,
 
   init() {
     this._super(...arguments);
-    this.deleteForm = new Changeset({ currentPassword: '' });
+    this.deleteForm = new Changeset({ currentPassword: '' }, lookupValidator(DeleteAccountValidation), DeleteAccountValidation);
     this.className = ['delete-user-component'];
   },
 
@@ -31,7 +34,9 @@ export default Component.extend({
       let scope = this;
       let config = get(scope, 'account-config');
 
-      if (get(scope, 'session.isAuthenticated')) {
+      await form.validate();
+
+      if (get(scope, 'session.isAuthenticated') && get(form, 'isValid')) {
         let currentUser = get(scope, 'firebaseApp').auth().currentUser; // eslint-disable-line ember-suave/prefer-destructuring
 
         // Get credentials for reauthentication via the user email and the entered password
