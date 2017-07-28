@@ -13,7 +13,7 @@ export default {
   ],
   email: [
     validatePresence(true),
-    validateEmail({ type: 'email', message: 'Email must be a valid email address', allowBlank: true })
+    validateEmail({ type: 'email', message: 'New email must be a valid email address', allowBlank: true })
   ],
-  emailConfirmation: validateConfirmation({ on: 'email' })
+  emailConfirmation: validateConfirmation({ on: 'email', message: 'New email confirmation doesn\'t match new email' })
 };
