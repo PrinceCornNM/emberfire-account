@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/update-email';
-import EmailValidations from '../validations/email';
+import EmailValidations from '../validations/update-email';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
@@ -35,7 +35,9 @@ export default Component.extend({
       let scope = this;
       let config = get(scope, 'account-config');
 
-      if (get(scope, 'session.isAuthenticated') && get(get(scope, 'email'), 'isValid')) {
+      await form.validate();
+
+      if (get(scope, 'session.isAuthenticated') && get(form, 'isValid')) {
         let currentUser = get(scope, 'firebaseApp').auth().currentUser; // eslint-disable-line ember-suave/prefer-destructuring
 
         // Get credentials for reauthentication via the user email and the entered password

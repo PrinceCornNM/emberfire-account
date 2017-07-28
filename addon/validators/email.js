@@ -3,7 +3,7 @@ import buildMessage from 'ember-changeset-validations/utils/validation-errors';
 const { isEmpty, assert, typeOf } = Ember;
 
 const emailRegex = {
-  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ //
 };
 
 export default function validateEmail(options = {}) {
@@ -16,7 +16,7 @@ export default function validateEmail(options = {}) {
       return true;
     }
 
-    if(!regex && type) {
+    if (!regex && type) {
       regex = emailRegex[type];
     }
 

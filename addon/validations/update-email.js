@@ -1,16 +1,19 @@
-// validations/email.js
+// validations/update-email.js - the validatior for the update-email component
+
 import {
   validatePresence,
-  // validateFormat,
-  // validateLength,
   validateConfirmation
 } from 'ember-changeset-validations/validators';
+
 import validateEmail from '../validators/email';
 
 export default {
+  currentPassword: [
+    validatePresence(true)
+  ],
   email: [
     validatePresence(true),
-    validateEmail({type: 'email', message: "E-mail must be a valid email address" })
+    validateEmail({ type: 'email', message: 'Email must be a valid email address', allowBlank: true })
   ],
   emailConfirmation: validateConfirmation({ on: 'email' })
 };
