@@ -1,14 +1,14 @@
 <div class="ef-account-form">
-  <h1 class="ef-account-form-title">Update Email</h1>
+  <h1 class="ef-account-form-title">Change Email</h1>
   {{#form-for email submit=(action 'updateEmail') as |f|}}
     <div class="ef-account-caption">{{{currentEmailPrompt}}}{{currentEmail}}</div>
     <div class="ef-account-form-input">
       {{f.password-field "currentPassword" label="Current Password" }}
       <br>
-      {{f.email-field "email" label="Email" }}
+      {{f.email-field "email" label="New Email" }}
       <br>
-      {{f.email-field "emailConfirmation" label="Email Confirmation" }}
+      {{f.email-field "emailConfirmation" label="New Email Confirmation" }}
     </div>
-    {{f.submit "Update Info" class="common-button"}}
+    {{f.submit "Update Email" class="common-button"}}
   {{/form-for}}
 </div>
