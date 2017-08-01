@@ -5,7 +5,7 @@ const DEFAULT_CONFIG = {
   hardDelete: false,
   links: {
     'account.delete': 'Delete Account',
-    'account.email': 'Update Email',
+    'account.email': 'Change Email',
     'account.password': 'Change Password',
     'account.verify-email': 'Send Email Verification'
   },
