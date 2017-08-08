@@ -1,7 +1,7 @@
 .ef-account .ef-account-sidebar {
-	float: left;
-	width: 20%;
-	margin-right: 0%;
+  float: left;
+  width: 20%;
+  margin-right: 0%;
 }
 .ef-account .ef-account-form {
   float: right;
@@ -20,27 +20,26 @@
   margin-bottom: 0%;
 }
 .ef-account-form-input {
-	width: 75%;
-	text-align: left;
-	margin-left: 16%;
+  margin-left: 16%;
+  text-align: left;
+  width: 75%;
 }
 .ef-account-form-input input:not([type]), .ef-account-form-input input[type="text"], .ef-account-form-input input[type="password"], .ef-account-form-input input[type="email"]  {
   float: right;
-  width: 50%;
   margin-right: 10%;
+  width: 50%;
 }
 .menu-section {
   display: inline-block;
 }
 .account-btn {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    width: 200px;
-    text-align: right;
-    margin-right: 10px;
-    cursor: pointer;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  text-align: right;
+  width: 200px;
 }
-
 .account-btn-cont {
-    display: inline-block;
+  display: inline-block;
 }
