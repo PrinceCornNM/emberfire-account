@@ -80,7 +80,9 @@ Can be found in app/instance-initializers. The config initializer specifies defa
     successfulLogout: 'You are now logged out!',
     unsuccessfulLogout: 'We were unable to log out of your account.',
     successfulCreateAccount: 'You have created an account successfully!',
-    unsuccessfulCreateAccount: 'We were unable to create your account.'
+    unsuccessfulCreateAccount: 'We were unable to create your account.',
+    currentEmailPrompt: 'Your current account email address is: ',
+    incorrectPassword: 'That is an incorrect password.'
   },
   links: {
     'account.link': 'Link', *You can provide custom routes here*
