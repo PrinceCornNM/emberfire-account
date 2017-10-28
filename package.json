@@ -1,6 +1,6 @@
 {
   "name": "emberfire-account",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An ember-addon for using emberfire for accounts",
   "keywords": [
     "ember-addon",
@@ -24,7 +24,7 @@
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "1.1.1",
     "ember-data": "2.11.0",
-    "ember-form-for": "2.0.0-alpha.17",
+    "ember-form-for": "2.0.0-alpha.15",
     "rsvp": "4.0.1"
   },
   "devDependencies": {
