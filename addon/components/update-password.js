@@ -1,3 +1,6 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 import Ember from 'ember';
 import layout from '../templates/components/update-password';
 import PasswordValidations from '../validations/update-password';
@@ -6,10 +9,7 @@ import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
 const {
-  Component,
-  inject: { service },
-  Logger: { log },
-  get
+  Logger: { log }
 } = Ember;
 
 export default Component.extend({

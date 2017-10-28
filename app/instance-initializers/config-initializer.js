@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { merge } from '@ember/polyfills';
+import { set } from '@ember/object';
 import config from '../config/environment';
 
 const DEFAULT_CONFIG = {
@@ -28,8 +29,6 @@ const DEFAULT_CONFIG = {
     incorrectPassword: 'That is an incorrect password.'
   }
 };
-
-const { merge, set } = Ember;
 
 export function initialize(appInstance) {
   let configService = appInstance.lookup('service:account-config');

@@ -1,12 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { set, get } from '@ember/object';
 import layout from '../templates/components/verify-email';
-
-const {
-  Component,
-  inject: { service },
-  get,
-  set
-} = Ember;
 
 export default Component.extend({
   firebaseApp: service(),

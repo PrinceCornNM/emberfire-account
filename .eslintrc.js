@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
+<<<<<<< HEAD
     ecmaVersion: 8,
     sourceType: 'module'
   },
@@ -28,5 +29,15 @@ module.exports = {
     "promise/prefer-await-to-callbacks": "error",
     "promise/prefer-await-to-then": "error"
 
+=======
+    ecmaVersion: 2017,
+    sourceType: 'module'
+  },
+  extends: 'eslint:recommended',
+  env: {
+    browser: true
+  },
+  rules: {
+>>>>>>> fa3a27c... diff
   }
 };

@@ -1,12 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get, computed } from '@ember/object';
 import layout from '../templates/components/account-menu';
-
-const {
-  Component,
-  inject: { service },
-  computed,
-  get
-} = Ember;
 
 export default Component.extend({
   'account-config': service(),

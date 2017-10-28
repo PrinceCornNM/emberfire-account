@@ -1,3 +1,6 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { set, get } from '@ember/object';
 import Ember from 'ember';
 import layout from '../templates/components/delete-user';
 import DeleteAccountValidation from '../validations/delete-account';
@@ -6,10 +9,6 @@ import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
 const {
-  Component,
-  inject: { service },
-  get,
-  set,
   Logger: { log }
 } = Ember;
 

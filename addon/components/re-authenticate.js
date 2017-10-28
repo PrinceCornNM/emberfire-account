@@ -1,3 +1,6 @@
+import Component from '@ember/component';
+import { set, get } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import layout from '../templates/components/re-authenticate';
 import ReauthenticateValidations from '../validations/reauthenticate';
@@ -6,10 +9,6 @@ import lookupValidator from 'ember-changeset-validations';
 import firebase from 'firebase';
 
 const {
-  Component,
-  get,
-  set,
-  inject: { service },
   Logger: { log }
 } = Ember;
 

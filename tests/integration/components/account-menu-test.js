@@ -1,10 +1,6 @@
+import Service from '@ember/service';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-const {
-  Service
-} = Ember;
 
 const configStub = Service.extend({
   links: { // eslint-disable-line ember/avoid-leaking-state-in-components

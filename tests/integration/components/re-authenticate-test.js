@@ -1,17 +1,8 @@
+import Service from '@ember/service';
+import RSVP from 'rsvp';
+import { set, get } from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-// const sessionStub = Service.extend({
-//   isAuthenticated: true
-// });
-
-const {
-  Service,
-  RSVP,
-  get,
-  set
-} = Ember;
 
 const firebaseStub = Service.extend({
   shouldFail: false,

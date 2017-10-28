@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import { typeOf, isEmpty } from '@ember/utils';
 import buildMessage from 'ember-changeset-validations/utils/validation-errors';
-const { isEmpty, assert, typeOf } = Ember;
 
 const emailRegex = {
   email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ //

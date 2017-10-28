@@ -1,13 +1,8 @@
+import RSVP from 'rsvp';
+import Service from '@ember/service';
+import { set, get } from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-const {
-  RSVP,
-  Service,
-  get,
-  set
-} = Ember;
 
 const firebaseStub = Service.extend({
   emailVerified: false,
