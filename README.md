@@ -4,13 +4,7 @@ Ember Fire Account provides an account dashboard where users can modify their in
 
 ## Installation
 
-<<<<<<< HEAD
 `ember install emberfire-account`
-=======
-* `git clone <repository-url>` this repository
-* `cd my-addon`
-* `npm install`
->>>>>>> fa3a27c... diff
 
 #### Installing Firebase
 
