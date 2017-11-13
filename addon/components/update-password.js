@@ -39,7 +39,7 @@ export default Component.extend({
         let credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, get(form, 'currentPassword'));
 
         try {
-          await currentUser.reauthenticate(credential);
+          await currentUser.reauthenticateWithCredential(credential);
 
           try {
             await get(scope, 'firebaseApp').auth().currentUser.updatePassword(get(form, 'newPassword'));

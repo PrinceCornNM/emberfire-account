@@ -43,7 +43,7 @@ export default Component.extend({
 
         // try to reauthenticate, and catch any errors that come up
         try {
-          await currentUser.reauthenticate(credential);
+          await currentUser.reauthenticateWithCredential(credential);
 
           try {
             let userRecord = await get(scope, 'store').findRecord('user', currentUser.uid);

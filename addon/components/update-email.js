@@ -1,6 +1,10 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import { set, get } from '@ember/object';
+import {
+  set,
+  setProperties,
+  get
+} from '@ember/object';
 import Ember from 'ember';
 import layout from '../templates/components/update-email';
 import EmailValidations from '../validations/update-email';
@@ -23,10 +27,14 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.email = new Changeset({ email: '', emailConfirmation: '', currentPassword: '' }, lookupValidator(EmailValidations), EmailValidations);
-    this.currentEmail = get(this, 'firebaseApp').auth().currentUser.email;
-    this.currentEmailPrompt = get(this, 'account-config').messages.currentEmailPrompt;
-    this.classNames = ['update-email-component'];
+
+    let currentEmail = get(this, 'firebaseApp').auth().currentUser && get(this, 'firebaseApp').auth().currentUser.email;
+    setProperties(this, {
+      email: new Changeset({ email: '', emailConfirmation: '', currentPassword: '' }, lookupValidator(EmailValidations), EmailValidations),
+      currentEmail,
+      currentEmailPrompt: get(this, 'account-config.messages.currentEmailPrompt'),
+      classNames: ['update-email-component']
+    });
   },
 
   actions: {
@@ -43,7 +51,7 @@ export default Component.extend({
         let credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, get(form, 'currentPassword'));
 
         try {
-          await currentUser.reauthenticate(credential);
+          await currentUser.reauthenticateWithCredential(credential);
 
           try {
             await currentUser.updateEmail(get(form, 'email'));
