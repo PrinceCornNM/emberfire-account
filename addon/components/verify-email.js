@@ -12,7 +12,8 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    set(this, 'isVerified', get(this, 'firebaseApp').auth().currentUser.emailVerified);
+    let emailVerified = get(this, 'firebaseApp').auth().currentUser && get(this, 'firebaseApp').auth().currentUser.emailVerified;
+    set(this, 'isVerified', emailVerified);
     this.classNames = ['verify-email-component'];
   },
 
