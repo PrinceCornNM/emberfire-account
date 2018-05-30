@@ -20,7 +20,6 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-changeset": "1.5.0-beta.0",
     "ember-changeset-validations": "1.2.11",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "1.1.1",
