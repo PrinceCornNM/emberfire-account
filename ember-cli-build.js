@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 /* eslint-disable */
-/* global require, module */
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-=======
-/* eslint-env node */
 'use strict';
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
->>>>>>> fa3a27c... diff
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {

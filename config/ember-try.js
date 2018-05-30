@@ -1,25 +1,4 @@
-<<<<<<< HEAD
 /* eslint-disable */
-module.exports = {
-  scenarios: [
-    // {
-    //   name: 'ember-lts-2.4',
-    //   bower: {
-    //     dependencies: {
-    //       'ember': 'components/ember#lts-2-4'
-    //     },
-    //     resolutions: {
-    //       'ember': 'lts-2-4'
-    //     }
-    //   },
-    //   npm: {
-    //     devDependencies: {
-    //       'ember-source': null
-    //     }
-    //   }
-    // },
-=======
-/* eslint-env node */
 module.exports = {
   scenarios: [
     {
@@ -38,7 +17,6 @@ module.exports = {
         }
       }
     },
->>>>>>> fa3a27c... diff
     {
       name: 'ember-lts-2.12',
       npm: {
